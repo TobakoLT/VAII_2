@@ -5,3 +5,90 @@
 .navbar-brand img {
     width: 50px;
 }
+body{
+    background: linear-gradient(
+            45deg,
+            rgb(255, 185, 0),
+            rgba(252, 14, 71, 0.5) 100%) no-repeat fixed;
+    background-size: 100%;
+}
+
+.bg-color{
+    background: linear-gradient(
+            45deg,
+            rgb(255, 14, 71, 0.5),
+            rgba(255, 185, 0) 100%);
+}
+
+.font-size{
+    font-size: x-large;
+}
+
+.font-set{
+    text-align: left;
+    font-family: Charcoal, monospace;
+}
+
+.menu-button{
+    transition: all 400ms;
+}
+
+.menu-button:hover{
+    background-color: rgb(176, 105, 9);
+}
+
+.img-size{
+    width: 45px;
+}
+
+.p-index{
+    text-align: justify;
+    font-size: 18px;
+}
+
+
+.header1{
+    margin-top: 20px;
+    padding-bottom: 15px;
+}
+
+.clanok1{
+    font-family: Charcoal, monospace;
+    text-decoration: none;
+    color: #000000;
+    transition: 300ms;
+}
+.clanok1:hover{
+    color: rgb(176, 105, 9);
+}
+
+.box{
+    box-sizing: border-box;
+    border: 3px solid transparent;
+    background-clip:padding-box;
+}
+
+.map-responsive{
+    overflow:hidden;
+    padding-bottom:56.25%;
+    position:relative;
+    height:0;
+}
+
+.map-responsive iframe{
+    left:0;
+    top:0;
+    height:100%;
+    width:100%;
+    position:absolute;
+}
+
+.border-img img {
+    transition: .5s ease;
+}
+
+.border-img img:hover{
+    box-shadow: 0 0 0 5px #000000;
+    transition: .5s ease;
+}
+

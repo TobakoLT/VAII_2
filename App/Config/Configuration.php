@@ -11,8 +11,8 @@ use App\Auth\DummyAuthenticator;
  */
 class Configuration
 {
-    public const APP_NAME = 'Vaííčko MVC FW';
-    public const FW_VERSION = '2.0';
+    public const APP_NAME = 'CrossMagazine';
+    //public const FW_VERSION = '2.0';
 
     public const DB_HOST = 'localhost';  // change to db, if docker you use docker
     public const DB_NAME = 'vaiicko_db';

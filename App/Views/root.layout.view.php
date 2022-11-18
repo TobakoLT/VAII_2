@@ -16,19 +16,33 @@
             crossorigin="anonymous"></script>
     <link rel="stylesheet" href="public/css/styl.css">
     <script src="public/js/script.js"></script>
+    <link rel="icon" type="image/x-icon" href="public/images/motologo1.png">
 </head>
 <body>
-<nav class="navbar navbar-expand-sm bg-light">
+<nav class="navbar navbar-expand-sm bg-color border border-danger border-opacity-25 border-1">
     <div class="container-fluid">
         <a class="navbar-brand" href="?c=home">
-            <img src="public/images/vaiicko_logo.png" title="<?= \App\Config\Configuration::APP_NAME ?>"
-                 title="<?= \App\Config\Configuration::APP_NAME ?>">
+            <img src="public/images/motologo1.png" title="<?= \App\Config\Configuration::APP_NAME ?>">
         </a>
-        <ul class="navbar-nav me-auto">
-            <li class="nav-item">
-                <a class="nav-link" href="?c=home&a=contact">Kontakt</a>
-            </li>
-        </ul>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar1" aria-controls="navbar1" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbar1">
+            <ul class="navbar-nav sticky-top font-size mx-auto mb-2 mb-sm-0">
+                <li class="nav-item" >
+                    <a class="nav-link active menu-button rounded me-1" aria-current="page" href="?c=home&a=index">ÚVOD</a>
+                </li>
+                <li class="nav-item" >
+                    <a class="nav-link menu-button rounded me-1" href="?c=home&a=gallery">GALÉRIA</a>
+                </li>
+                <li class="nav-item ">
+                    <a class="nav-link menu-button rounded me-1" href="?c=home&a=info">INFORMÁCIE</a>
+                </li>
+                <li class="nav-item ">
+                    <a class="nav-link menu-button rounded" href="?c=home&a=contact">KONTAKT</a>
+                </li>
+            </ul>
+        </div>
         <?php if ($auth->isLogged()) { ?>
             <span class="navbar-text">Prihlásený používateľ: <b><?= $auth->getLoggedUserName() ?></b></span>
             <ul class="navbar-nav ms-auto">
