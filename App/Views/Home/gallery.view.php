@@ -1,12 +1,12 @@
 <div class="container-fluid font-set">
-    <h2 class="mt-2"><b>Galéria obrázkov</b></h2>
-    <p>Kliknite pre zvačšenie.</p>
-    <form class="mb-md-3 border border-white border-2 rounded mb-2 bg-color-white" method="post" enctype="multipart/form-data">
-        <input  type="file" name="file">
-        <input  type="submit" value="Odosli">
-    </form>
-    <div class="row border-img">
 
+        <h2 class="mt-2"><b>Galéria obrázkov</b></h2>
+        <p>Kliknite pre zvačšenie.</p>
+    <div class="col-md-1 mb-3">
+            <a class="btn btn-warning border-dark border-2" href="?c=posts" role="button">UPLOAD HERE</a>
+    </div>
+
+    <div class="row border-img">
 
         <div class="col-md-4">
             <div class="mb-md-3 border border-white border-2 rounded mb-2">
