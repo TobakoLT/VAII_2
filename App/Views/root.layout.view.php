@@ -24,10 +24,10 @@
         <a class="navbar-brand" href="?c=home">
             <img src="public/images/motologo1.png" title="<?= \App\Config\Configuration::APP_NAME ?>">
         </a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar1" aria-controls="navbar1" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbar1">
+        <div class="collapse navbar-collapse" id="collapsibleNavbar">
             <ul class="navbar-nav sticky-top font-size mx-auto mb-2 mb-sm-0">
                 <li class="nav-item" >
                     <a class="nav-link active menu-button rounded me-1" aria-current="page" href="?c=home&a=index">ÚVOD</a>
