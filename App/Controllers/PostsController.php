@@ -31,7 +31,8 @@ class PostsController extends AControllerBase
 
         $post = ( $id ? Post::getOne($id) : new Post());
         $post->setAutor($this->request()->getValue('autor'));
-        $post->setDatum($this->request()->getValue('datum'));
+        $post->setNadpis($this->request()->getValue('nadpis'));
+        $post->setDatum(date("Y-m-d"));
         $post->setClanok($this->request()->getValue('clanok'));
         $post->setObrazok($this->request()->getValue('obrazok'));
         $post->save();

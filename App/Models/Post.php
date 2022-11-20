@@ -8,6 +8,7 @@ class Post extends Model
 {
     protected $id;
     protected $autor;
+    protected $nadpis;
     protected $datum;
     protected $clanok;
     protected $obrazok;
@@ -42,6 +43,22 @@ class Post extends Model
     public function setAutor($autor): void
     {
         $this->autor = $autor;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getNadpis()
+    {
+        return $this->nadpis;
+    }
+
+    /**
+     * @param mixed $nadpis
+     */
+    public function setNadpis($nadpis): void
+    {
+        $this->nadpis = $nadpis;
     }
 
     /**
@@ -91,6 +108,7 @@ class Post extends Model
     {
         $this->obrazok = $obrazok;
     }
+
 
 
 }
