@@ -3,14 +3,14 @@
         <h2 class="mt-2"><b>Galéria obrázkov</b></h2>
         <p>Kliknite pre zvačšenie.</p>
     <div class="col-md-2 mb-3">
-            <a class="btn btn-warning border-dark border-2" href="?c=posts" role="button">Nahraj si vlastný obrázok</a>
+            <a class="btn btn-warning border-dark border-2" href="?c=images" role="button">Nahraj si vlastný obrázok</a>
     </div>
 
     <div class="row border-img">
 
         <div class="col-md-4">
             <div class="mb-md-3 border border-white border-2 rounded mb-2">
-                <a href="public/images/cross1.jpg" target="_blank" >
+                <a href="public/images/cross1.jpg" target="_blank">
                     <img src="public/images/cross1.jpg" alt="moto1" class="image-mask w-100 mb-0 rounded img-fluid">
 
                 </a>

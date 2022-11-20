@@ -1,6 +1,10 @@
 <div class="container-mt-5 mt-4 text-center container-fluid">
     <div class="row header1">
         <h1>CrossMagazine</h1>
+        <div class="col-md-2 mb-3">
+            <a class="btn btn-warning border-dark border-2" href="?c=posts" role="button">Pridať článok</a>
+        </div>
+
     </div>
 
 
