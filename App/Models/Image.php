@@ -4,7 +4,7 @@ namespace App\Models;
 
 use App\Core\Model;
 
-class Post extends Model
+class Image extends Model
 {
     protected $id;
     protected $text;
