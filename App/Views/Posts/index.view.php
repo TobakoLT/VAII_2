@@ -1,13 +1,16 @@
 <?php
 use App\Models\Post;
+/** @var \App\Core\IAuthenticator $auth */
 /** @var Post[] $data */
 ?>
 
 <div>
+    <?php if($auth->isLogged()) {?>
     <a href="?c=posts&a=create"
        class="mb-md-3 border border-dark border-2 rounded mb-2 bg-color btn">
         Pridaj clanok
     </a>
+    <?php } ?>
 </div>
 
 <div class="row mb-2 g-2 ">
@@ -22,6 +25,7 @@ foreach ($data as $post) {
         <p class="card-text p-index"><?php echo $post->getClanok() ?></p>
         <img src="<?php echo $post->getObrazok() ?>" alt="moto1" class="image-mask w-100 mb-0 rounded img-fluid">
 
+        <?php if($auth->isLogged()) {?>
         <a href="?c=posts&a=delete&id=<?php echo $post->getId() ?>" class="btn btn-danger">
             Zmazat
         </a>
@@ -32,3 +36,4 @@ foreach ($data as $post) {
         <?php } ?>
     </div>
 </div>
+<?php } ?>
