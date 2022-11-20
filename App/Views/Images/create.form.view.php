@@ -9,10 +9,10 @@
       <input type="hidden" name="id" value="<?php echo $data->getId() ?>">
     <?php } ?>
     <label>Zadaj URL adresu obrázka:
-        <input class="rounded" size="120%" type="url" name="img" value="<?php echo $data->getImg() ?>">
+        <input class="rounded" size="" type="url" name="img" value="<?php echo $data->getImg() ?>">
     </label>
     <label>Zadaj popis k obrázku:
-        <input class="rounded" size="120%" type="text" name="text" value="<?php echo $data->getText() ?>">
+        <input class="rounded" size="" type="text" name="text" value="<?php echo $data->getText() ?>">
     </label>
     <input class="rounded mt-1" type="submit" value="Odoslať">
 </form>
