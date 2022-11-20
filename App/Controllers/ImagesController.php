@@ -8,6 +8,18 @@ use App\Models\Image;
 
 class ImagesController extends AControllerBase
 {
+    public function authorize($action): bool
+    {
+        switch ($action) {
+            case "delete":
+            case "create":
+            case "store":
+            case "edit":
+                return $this->app->getAuth()->isLogged();
+
+        }
+        return true;
+    }
 
     public function index(): Response
     {
