@@ -56,7 +56,7 @@
     </div>
     <!-- The Modal -->
     <div class="popup-image">
-        <span>&times;</span>
+        <span>&times</span>
         <img src="" alt="">
     </div>
     <script>
