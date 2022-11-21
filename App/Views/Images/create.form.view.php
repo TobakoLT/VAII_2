@@ -9,7 +9,7 @@
       <input type="hidden" name="id" value="<?php echo $data->getId() ?>">
     <?php } ?>
     <label>Zadaj URL adresu obrázka:
-        <input class="rounded" size="" type="url" name="img" value="<?php echo $data->getImg() ?>">
+        <input required class="rounded" size="" type="url" name="img" value="<?php echo $data->getImg() ?>">
     </label>
     <label>Zadaj popis k obrázku:
         <input class="rounded" size="" type="text" name="text" value="<?php echo $data->getText() ?>">

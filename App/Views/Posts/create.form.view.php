@@ -12,10 +12,10 @@
                 <input class="rounded" size="120%" type="text" name="autor" value="<?php echo $data->getAutor() ?>">
             </label>
             <label>Nadpis:
-                <input class="rounded" size="120%" type="text" name="nadpis" value="<?php echo $data->getNadpis() ?>">
+                <input required class="rounded" size="120%" type="text" name="nadpis" value="<?php echo $data->getNadpis() ?>">
             </label>
             <label>Text clánku:
-                <input class="rounded" size="120%" type="text" name="clanok" value="<?php echo $data->getClanok() ?>">
+                <input required class="rounded" size="120%" type="text" name="clanok" value="<?php echo $data->getClanok() ?>">
             </label>
             <label>Obrázok:
                 <input class="rounded" size="120%" type="url" name="obrazok" value="<?php echo $data->getObrazok() ?>">
