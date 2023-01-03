@@ -5,6 +5,7 @@ namespace App\Controllers;
 use App\Core\AControllerBase;
 use App\Core\Responses\Response;
 use App\Models\Image;
+use App\Models\Post;
 
 class ImagesController extends AControllerBase
 {
@@ -34,6 +35,7 @@ class ImagesController extends AControllerBase
         if ($imageToDelete->getImg()) {
             unlink($imageToDelete->getImg());
         }
+        $imageToDelete->delete();
         return $this->redirect("?c=images");
     }
 
@@ -43,7 +45,6 @@ class ImagesController extends AControllerBase
         $image = ( $id ? Image::getOne($id) : new Image());
         $oldPhoto = $image->getImg();
 
-        $image->setImg($this->request()->getValue('img'));
         $image->setText($this->request()->getValue('text'));
         $image->setImg($this->processUploadedFile($image));
         if (!is_null($oldPhoto) && is_null($image->getImg())) {
@@ -65,14 +66,14 @@ class ImagesController extends AControllerBase
         return $this->html($imageToEdit, viewName: 'create.form');
     }
 
-    private function processUploadedFile(Image $image)
+    private function processUploadedFile(Image $post)
     {
         $photo = $this->request()->getFiles()['photo'];
         if (!is_null($photo) && $photo['error'] == UPLOAD_ERR_OK) {
             $targetFile = "public" . DIRECTORY_SEPARATOR . "photos" . DIRECTORY_SEPARATOR . time() . "_" . $photo['name'];
             if (move_uploaded_file($photo["tmp_name"], $targetFile)) {
-                if ($image->getId() && $image->getImg()) {
-                    unlink($image->getImg());
+                if ($post->getId() && $post->getImg()) {
+                    unlink($post->getImg());
                 }
                 return $targetFile;
             }

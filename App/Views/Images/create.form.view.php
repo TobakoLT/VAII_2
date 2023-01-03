@@ -8,9 +8,8 @@
       if ($data->getId()) { ?>
       <input type="hidden" name="id" value="<?php echo $data->getId() ?>">
     <?php } ?>
-    <label>Zadaj URL adresu obrázka:
-        <input required class="rounded" size="" type="url" name="img" value="<?php echo $data->getImg() ?>">
-    </label>
+    <label for="photo" class="form-label">Obrázok:</label>
+    <input class="form-control" formenctype="multipart/form-data" type="file" id="photo" name="photo">
     <label>Zadaj popis k obrázku:
         <input class="rounded" size="" type="text" name="text" value="<?php echo $data->getText() ?>">
     </label>
