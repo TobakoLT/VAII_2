@@ -45,7 +45,7 @@ class Image extends Model
     /**
      * @return mixed
      */
-    public function getImg()
+    public function getImg(): ?string
     {
         return $this->img;
     }
@@ -53,7 +53,7 @@ class Image extends Model
     /**
      * @param mixed $img
      */
-    public function setImg($img): void
+    public function setImg(?string $img): void
     {
         $this->img = $img;
     }

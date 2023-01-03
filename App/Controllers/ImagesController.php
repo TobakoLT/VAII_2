@@ -31,8 +31,8 @@ class ImagesController extends AControllerBase
     {
         $id = $this->request()->getValue('id');
         $imageToDelete = Image::getOne($id);
-        if ($imageToDelete) {
-            $imageToDelete->delete();
+        if ($imageToDelete->getImg()) {
+            unlink($imageToDelete->getImg());
         }
         return $this->redirect("?c=images");
     }
@@ -40,10 +40,15 @@ class ImagesController extends AControllerBase
     public function store()
     {
         $id = $this->request()->getValue('id');
-
         $image = ( $id ? Image::getOne($id) : new Image());
+        $oldPhoto = $image->getImg();
+
         $image->setImg($this->request()->getValue('img'));
         $image->setText($this->request()->getValue('text'));
+        $image->setImg($this->processUploadedFile($image));
+        if (!is_null($oldPhoto) && is_null($image->getImg())) {
+            unlink($oldPhoto);
+        }
         $image->save();
         return $this->redirect("?c=images");
     }
@@ -58,5 +63,20 @@ class ImagesController extends AControllerBase
         $id = $this->request()->getValue('id');
         $imageToEdit = Image::getOne($id);
         return $this->html($imageToEdit, viewName: 'create.form');
+    }
+
+    private function processUploadedFile(Image $image)
+    {
+        $photo = $this->request()->getFiles()['photo'];
+        if (!is_null($photo) && $photo['error'] == UPLOAD_ERR_OK) {
+            $targetFile = "public" . DIRECTORY_SEPARATOR . "photos" . DIRECTORY_SEPARATOR . time() . "_" . $photo['name'];
+            if (move_uploaded_file($photo["tmp_name"], $targetFile)) {
+                if ($image->getId() && $image->getImg()) {
+                    unlink($image->getImg());
+                }
+                return $targetFile;
+            }
+        }
+        return null;
     }
 }
