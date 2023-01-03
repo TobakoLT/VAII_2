@@ -8,15 +8,20 @@
             if ($data->getId()) { ?>
                 <input type="hidden" name="id" value="<?php echo $data->getId() ?>">
             <?php } ?>
-            <label>Meno autora:
-                <input class="rounded" size="120%" type="text" name="autor" value="<?php echo $data->getAutor() ?>">
-            </label>
+
+            <div class="mb-3">
+                <label for="FormName" class="form-label">Meno autora</label>
+                <input type="text" class="form-control" id="FormName" value="<?php echo $data->getAutor() ?>">
+            </div>
+
             <label>Nadpis:
-                <input required class="rounded" size="120%" type="text" name="nadpis" value="<?php echo $data->getNadpis() ?>">
+                <input class="form-control" required size="120%" type="text" name="nadpis" value="<?php echo $data->getNadpis() ?>">
             </label>
+
             <label>Text clánku:
-                <input required class="rounded" size="120%" type="text" name="clanok" value="<?php echo $data->getClanok() ?>">
+                <input required class="rounded form-control" size="120%" type="text" name="clanok" value="<?php echo $data->getClanok() ?>">
             </label>
+
             <label>Obrázok:
                 <input class="rounded" size="120%" type="url" name="obrazok" value="<?php echo $data->getObrazok() ?>">
             </label>
