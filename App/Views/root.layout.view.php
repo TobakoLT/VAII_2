@@ -29,10 +29,10 @@
         </button>
         <div class="collapse navbar-collapse" id="collapsibleNavbar">
             <ul class="navbar-nav sticky-top font-size ms-auto mb-2 mb-sm-0">
-                <li class="nav-item" >
+                <li class="nav-item " >
                     <a class="nav-link active menu-button rounded me-1" aria-current="page" href="?c=home&a=index">ÚVOD</a>
                 </li>
-                <li class="nav-item" >
+                <li class="nav-item " >
                     <a class="nav-link active menu-button rounded me-1" href="?c=home&a=gallery">GALÉRIA</a>
                 </li>
                 <li class="nav-item ">
@@ -53,6 +53,9 @@
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
                         <a class="nav-link" href="<?= \App\Config\Configuration::LOGIN_URL ?>">Prihlásenie</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="<?= \App\Config\Configuration::REGISTER_URL ?>">Registrácia</a>
                     </li>
                 </ul>
             <?php } ?>
