@@ -12,7 +12,7 @@ $layout = 'auth';
                     <div class="text-center text-danger mb-3">
                         <?= @$data['message'] ?>
                     </div>
-                    <form method="post" class="form-signin" action="?c=users&a=store">
+                    <form method="post" class="form-signin" action="?c=auth&a=store">
                         <div class="form-label-group">
                             <label for="username">Používateľské meno</label>
                             <input type="text" id="username" name="username" class="form-control" placeholder="Používateľské meno" required autofocus>
@@ -25,7 +25,7 @@ $layout = 'auth';
                         </div>
                         <div class="form-label-group mt-2">
                             <label for="meno">Celé meno</label>
-                            <input type="text" id="meno" name="full_name" class="form-control" placeholder="Janko Hraško" required>
+                            <input type="text" id="meno" name="meno" class="form-control" placeholder="Janko Hraško" required>
 
                         </div>
                         <div class="form-label-group mt-2">

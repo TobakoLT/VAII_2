@@ -104,11 +104,10 @@ class User extends Model
     /**
      * @param string|null $created_at
      */
-    /*
     public function setCreatedAt(?string $created_at): void
     {
         $this->created_at = $created_at;
     }
-    */
+
 
 }
