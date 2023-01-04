@@ -18,7 +18,7 @@ class Authenticator implements IAuthenticator
 
     function  login($login, $password): bool
     {
-        $user = User::getAll("login = ?", [$login])[0] ?? null;
+        $user = User::getAll("username = ?", [$login])[0] ?? null;
 
         if ($user != null) {
             if (password_verify($password, $user->getPasswordHash())) {
@@ -40,7 +40,7 @@ class Authenticator implements IAuthenticator
 
     function getLoggedUserName(): string
     {
-        return isset($_SESSION['user']) && $_SESSION['user'] != null;
+        return $_SESSION['user']->getUsername() ?? throw new \Exception("User not logged in");
     }
 
     function getLoggedUserId(): mixed
