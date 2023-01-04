@@ -23,7 +23,7 @@
             </label>
 
             <label>Obrázok:
-                <input class="rounded" size="120%" type="url" name="obrazok" value="<?php echo $data->getObrazok() ?>">
+                <input class="rounded" size="120%" type="file" name="photo" id="photo">
             </label>
             <input class="rounded mt-1" type="submit" value="Odoslať">
         </form>

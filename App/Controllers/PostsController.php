@@ -32,8 +32,9 @@ class PostsController extends AControllerBase
     {
         $id = $this->request()->getValue('id');
         $postToDelete = Post::getOne($id);
-        if ($postToDelete) {
+        if ($postToDelete || $postToDelete->getObrazok()) {
             $postToDelete->delete();
+            unlink($postToDelete->getObrazok());
         }
         return $this->redirect("?c=posts");
     }
@@ -41,13 +42,18 @@ class PostsController extends AControllerBase
     public function store()
     {
         $id = $this->request()->getValue('id');
+        $post = ($id ? Post::getOne($id) : new Post());
+        $oldPhoto = $post->getObrazok();
 
         $post = ( $id ? Post::getOne($id) : new Post());
         $post->setAutor($this->request()->getValue('autor'));
         $post->setNadpis($this->request()->getValue('nadpis'));
         $post->setDatum(date("Y-m-d"));
         $post->setClanok($this->request()->getValue('clanok'));
-        $post->setObrazok($this->request()->getValue('obrazok'));
+        $post->setObrazok($this->processUploadedFile($post));
+        if (!is_null($oldPhoto) && is_null($post->getObrazok())) {
+            unlink($oldPhoto);
+        }
         $post->save();
         return $this->redirect("?c=posts");
     }
@@ -62,5 +68,20 @@ class PostsController extends AControllerBase
         $id = $this->request()->getValue('id');
         $postToEdit = Post::getOne($id);
         return $this->html($postToEdit, viewName: 'create.form');
+    }
+
+    private function processUploadedFile(Post $post)
+    {
+        $photo = $this->request()->getFiles()['photo'];
+        if (!is_null($photo) && $photo['error'] == UPLOAD_ERR_OK) {
+            $targetFile = "public" . DIRECTORY_SEPARATOR . "photosPosts" . DIRECTORY_SEPARATOR . time() . "_" . $photo['name'];
+            if (move_uploaded_file($photo["tmp_name"], $targetFile)) {
+                if ($post->getId() && $post->getObrazok()) {
+                    unlink($post->getObrazok());
+                }
+                return $targetFile;
+            }
+        }
+        return null;
     }
 }

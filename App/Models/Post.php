@@ -96,7 +96,7 @@ class Post extends Model
     /**
      * @return mixed
      */
-    public function getObrazok()
+    public function getObrazok(): ?string
     {
         return $this->obrazok;
     }
@@ -104,7 +104,7 @@ class Post extends Model
     /**
      * @param mixed $obrazok
      */
-    public function setObrazok($obrazok): void
+    public function setObrazok(?string $obrazok): void
     {
         $this->obrazok = $obrazok;
     }
