@@ -7,7 +7,7 @@ use App\Core\Model;
 class User extends Model
 {
     protected ?int $id = 0;
-    protected ?string $login = "";
+    protected ?string $username = "";
     protected ?string $email = "";
     protected ?string $meno = "";
     protected ?string $password_hash = "";
@@ -32,17 +32,17 @@ class User extends Model
     /**
      * @return string|null
      */
-    public function getLogin(): ?string
+    public function getUsername(): ?string
     {
-        return $this->login;
+        return $this->username;
     }
 
     /**
      * @param string|null $login
      */
-    public function setLogin(?string $login): void
+    public function setUsername(?string $username): void
     {
-        $this->login = $login;
+        $this->username = $username;
     }
 
     /**
