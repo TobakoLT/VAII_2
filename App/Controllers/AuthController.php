@@ -73,7 +73,7 @@ class AuthController extends AControllerBase
             $user->setMeno($this->request()->getValue('meno'));
             $user->setEmail($email);
             $user->setPasswordHash(password_hash($password, PASSWORD_DEFAULT));
-            $user->setCreatedAt(date("Y-m-d"));
+            $user->setCreatedAt(date("Y-m-d H:i:s"));
             $user->save();
         }
         return $this->redirect("?c=auth&a=login");
@@ -85,17 +85,21 @@ class AuthController extends AControllerBase
         return $this->html(null,'login');
     }
 
+    /**
+     * @return \App\Core\Responses\JsonResponse
+     */
     public function loginUser(): Response
     {
         $login = $this->request()->getValue('username');
         $password = $this->request()->getValue('password');
         $logged = $this->app->getAuth()->login($login, $password);
 
-        if($logged) {
-            return $this->redirect("?c=home");
+        if(!$logged) {
+            return $this->json(['success' => false, 'message' => 'Zlý login alebo heslo']);
         }
-        return $this->json(['success' => false, 'message' => 'Zlý login alebo heslo']);
+        return $this->json(['success' => true]);
     }
+
 
     /**
      * Logout a user

@@ -9,9 +9,9 @@ $layout = 'auth';
                 <div class="card-body">
                     <h5 class="card-title text-center">Prihlásenie</h5>
                     <div class="text-center text-danger mb-3">
-                        <?= @$data['message'] ?>
+
                     </div>
-                    <form class="form-signin" method="post" action="?c=auth&a=loginUser">
+                    <form class="form-signin">
                         <div class="form-label-group mb-3">
                             <input name="username" type="text" id="username" class="form-control" placeholder="Login"
                                    required autofocus>
@@ -21,8 +21,9 @@ $layout = 'auth';
                             <input name="password" type="password" id="password" class="form-control"
                                    placeholder="Password" required>
                         </div>
+                        <div class="text-center text-danger mb-3" id="error-message"></div>
                         <div class="text-center">
-                            <button class="btn btn-primary" type="submit" name="submit">Prihlásiť
+                            <button class="btn btn-primary" type="submit" onclick="loginUser()" name="submit">Prihlásiť
                             </button>
                         </div>
                     </form>
