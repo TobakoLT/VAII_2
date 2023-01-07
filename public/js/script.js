@@ -76,6 +76,47 @@ function passwordStrengthNew() {
 
 }
 
+function passwordStrengthGradient() {
+    const passwordInput = document.getElementById("password");
+    const passwordStrengthIndicator = document.querySelector(
+        ".password-strength-indicator .strength"
+    );
+
+    passwordInput.addEventListener("input", updatePasswordStrength);
+
+    function updatePasswordStrength() {
+        const password = passwordInput.value;
+        const strengthRegex = new RegExp(
+            "^(?=.{8,})(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*\\W).*$",
+            "g"
+        );
+
+        if (strengthRegex.test(password)) {
+            // Silné
+            passwordStrengthIndicator.classList.remove("weak", "medium");
+            passwordStrengthIndicator.classList.add("strong");
+            passwordStrengthIndicator.parentElement.style.backgroundSize = "100% 100%"; /* zobrazí sa pozadie pre silné heslo */
+        } else {
+            const mediumRegex = new RegExp(
+                "^(?=.{8,})(((?=.*[A-Z])(?=.*[a-z]))|((?=.*[A-Z])(?=.*[0-9]))|((?=.*[a-z])(?=.*[0-9]))).*$",
+                "g"
+            );
+
+            if (mediumRegex.test(password)) {
+                // Stredne silné
+                passwordStrengthIndicator.classList.remove("weak", "strong");
+                passwordStrengthIndicator.classList.add("medium");
+                passwordStrengthIndicator.parentElement.style.backgroundSize = "50% 100%";
+            } else {
+                // Slabé
+                passwordStrengthIndicator.classList.remove("medium", "strong");
+                passwordStrengthIndicator.classList.add("weak");
+                passwordStrengthIndicator.parentElement.style.backgroundSize = "25% 100%";
+            }
+        }
+    }
+}
+
 async function loginUser() {
     // Získame hodnoty z formulára pre používateľské meno a heslo
     var username = $('#username').val();
