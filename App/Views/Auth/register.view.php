@@ -35,7 +35,9 @@ $layout = 'auth';
                         </div>
                         <div class="form-label-group">
                             <input type="password" id="password2" name="password2" class="form-control mt-1" placeholder="Zopakovať heslo" required>
-
+                        </div>
+                        <div class="password-strength-indicator mt-1" id="password-strength-indicator">
+                            <div class="strength"></div>
                         </div>
                         <button class="btn btn-lg btn-primary btn-block mt-3" type="submit" name="submit">Registrovať</button>
                     </form>
@@ -44,3 +46,5 @@ $layout = 'auth';
         </div>
     </div>
 </div>
+
+<script>passwordStrengthNew()</script>
