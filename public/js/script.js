@@ -52,28 +52,31 @@ function passwordStrengthNew() {
             "g"
         );
 
-        if (strengthRegex.test(password)) {
-            // Silné
-            passwordStrengthIndicator.classList.remove("weak", "medium");
-            passwordStrengthIndicator.classList.add("strong");
+        if (password === "") {
+            passwordStrengthIndicator.classList.remove("weak", "medium", "strong");
         } else {
             const mediumRegex = new RegExp(
                 "^(?=.{8,})(((?=.*[A-Z])(?=.*[a-z]))|((?=.*[A-Z])(?=.*[0-9]))|((?=.*[a-z])(?=.*[0-9]))).*$",
                 "g"
             );
-
-            if (mediumRegex.test(password)) {
-                // Stredne silné
-                passwordStrengthIndicator.classList.remove("weak", "strong");
-                passwordStrengthIndicator.classList.add("medium");
+            if (strengthRegex.test(password)) {
+                // Silné
+                passwordStrengthIndicator.classList.remove("weak", "medium");
+                passwordStrengthIndicator.classList.add("strong");
             } else {
-                // Slabé
-                passwordStrengthIndicator.classList.remove("medium", "strong");
-                passwordStrengthIndicator.classList.add("weak");
+
+                if (mediumRegex.test(password)) {
+                    // Stredne silné
+                    passwordStrengthIndicator.classList.remove("weak", "strong");
+                    passwordStrengthIndicator.classList.add("medium");
+                } else {
+                    // Slabé
+                    passwordStrengthIndicator.classList.remove("medium", "strong");
+                    passwordStrengthIndicator.classList.add("weak");
+                }
             }
         }
     }
-
 }
 
 function passwordStrengthGradient() {
