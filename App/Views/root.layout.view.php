@@ -22,9 +22,9 @@
 <body>
 <nav class="navbar navbar-expand-md bg-color border border-danger border-opacity-25 border-1">
     <div class="container-fluid ">
-        <div class="col-1">
+        <div class="">
             <a class="navbar-brand" href="?c=home">
-                <img src="public/images/motologo1.png" alt="" title="<?= \App\Config\Configuration::APP_NAME ?>">
+                <img src="public/images/motologo1.png"  alt="" title="<?= \App\Config\Configuration::APP_NAME ?>">
             </a>
         </div>
 
@@ -55,12 +55,13 @@
                 </ul>
             <?php } else { ?>
                 <ul class="navbar-nav ms-auto">
-                    <li class="nav-item ">
-                        <a class="nav-link" href="<?= \App\Config\Configuration::LOGIN_URL ?>">Prihlásenie</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="<?= \App\Config\Configuration::REGISTER_URL ?>">Registrácia</a>
-                    </li>
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item">
+                            <a class="nav-link menu-button rounded" href="<?= \App\Config\Configuration::LOGIN_URL ?>">
+                                <img src="public/images/account.webp" class="nav-logo" alt="" title="<?= \App\Config\Configuration::APP_NAME ?>">
+                            </a>
+                        </li>
+                    </ul>
                 </ul>
             <?php } ?>
         </div>

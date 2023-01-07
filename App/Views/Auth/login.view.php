@@ -23,9 +23,13 @@ $layout = 'auth';
                         </div>
                         <div class="text-center text-danger mb-3" id="error-message"></div>
                         <div class="text-center">
-                            <button class="btn btn-primary" type="submit" onclick="loginUser()" name="submit">Prihlásiť
+                            <button class="btn btn-primary" type="submit" onclick="$.ajax(loginUser())" name="submit">Prihlásiť
                             </button>
                         </div>
+                        <div class="form-group text-center mt-3">
+                            <p>Nemáte účet? <a href="?c=auth&a=register" class="">Zaregistrujte sa teraz!</a></p>
+                        </div>
+
                     </form>
                 </div>
             </div>
