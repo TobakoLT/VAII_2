@@ -1,4 +1,4 @@
-function modal() {
+/*function modal() {
     document.querySelectorAll('.image-container img').forEach(image =>{
         image.onclick = () => {
             document.querySelector('.popup-image').style.display = 'block';
@@ -12,7 +12,7 @@ function modal() {
     }
 
 }
-
+*/
 function passwordStrengthOld() {
     const passwordInput = document.getElementById('password');
     const passwordStrengthIndicator = document.getElementById('password-strength-indicator');
@@ -51,14 +51,13 @@ function passwordStrengthNew() {
             "^(?=.{8,})(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*\\W).*$",
             "g"
         );
-
+        const mediumRegex = new RegExp(
+            "^(?=.{8,})(((?=.*[A-Z])(?=.*[a-z]))|((?=.*[A-Z])(?=.*[0-9]))|((?=.*[a-z])(?=.*[0-9]))).*$",
+            "g"
+        );
         if (password === "") {
             passwordStrengthIndicator.classList.remove("weak", "medium", "strong");
         } else {
-            const mediumRegex = new RegExp(
-                "^(?=.{8,})(((?=.*[A-Z])(?=.*[a-z]))|((?=.*[A-Z])(?=.*[0-9]))|((?=.*[a-z])(?=.*[0-9]))).*$",
-                "g"
-            );
             if (strengthRegex.test(password)) {
                 // Silné
                 passwordStrengthIndicator.classList.remove("weak", "medium");
@@ -120,7 +119,7 @@ function passwordStrengthGradient() {
     }
 }
 
-async function loginUser() {
+async function loginUserX() {
     // Získame hodnoty z formulára pre používateľské meno a heslo
     var username = $('#username').val();
     var password = $('#password').val();
@@ -146,6 +145,30 @@ async function loginUser() {
     }
 }
 
+async function loginUser() {
+    // Získame hodnoty z formulára pre používateľské meno a heslo
+    const username = document.querySelector('#username').value;
+    const password = document.querySelector('#password').value;
+
+    // Vytvoríme objekt s požiadavkou na server
+    try {
+        const response = await fetch(`?c=auth&a=loginUser&password=${password}&username=${username}`, {
+            method: 'POST'
+        });
+
+        const data = await response.json();
+
+        // Ak bolo prihlásenie úspešné, presmerujeme používateľa na domovskú stránku
+        if (data.success) {
+            window.location.href='?c=home';
+        } else {
+            // Ak nebolo prihlásenie úspešné, zobrazíme chybovú hlášku
+            document.querySelector('#error-message').textContent = data.message;
+        }
+    } catch (error) {
+        console.error('Error:', error);
+    }
+}
 
 
 

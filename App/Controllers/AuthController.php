@@ -80,6 +80,9 @@ class AuthController extends AControllerBase
     }
 
 
+    /**
+     * @return \App\Core\Responses\ViewResponse
+     */
     public function login(): Response
     {
         return $this->html(null,'login');
