@@ -48,9 +48,16 @@
             </ul>
             <?php if ($auth->isLogged()) { ?>
                 <ul class="navbar-nav ms-auto">
-                    <span class="navbar-text">Prihlásený používateľ: <b><?= $auth->getLoggedUserName() ?></b></span>
+
+                    <li class="nav-item me-1">
+                        <a class="nav-link menu-button rounded">
+                            <img src="public/images/account.webp" class="nav-logo" alt="" title="">
+                        </a>
+                    </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="?c=auth&a=logout">Odhlásenie</a>
+                        <a class="nav-link menu-button rounded" href="?c=auth&a=logout">
+                            <img src="public/images/logout.png" class="nav-logo" alt="" title="">
+                        </a>
                     </li>
                 </ul>
             <?php } else { ?>
@@ -58,7 +65,7 @@
                     <ul class="navbar-nav ms-auto">
                         <li class="nav-item">
                             <a class="nav-link menu-button rounded" href="<?= \App\Config\Configuration::LOGIN_URL ?>">
-                                <img src="public/images/account.webp" class="nav-logo" alt="" title="<?= \App\Config\Configuration::APP_NAME ?>">
+                                <img src="public/images/login.png" class="nav-logo" alt="" title="<?= \App\Config\Configuration::APP_NAME ?>">
                             </a>
                         </li>
                     </ul>
