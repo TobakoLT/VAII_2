@@ -11,7 +11,9 @@ class User extends Model
     protected ?string $email = "";
     protected ?string $meno = "";
     protected ?string $password_hash = "";
+    protected ?string $account_img = "";
     protected ?string $created_at = "";
+    protected ?string $edited_at = "";
 
     /**
      * @return int|null
@@ -107,6 +109,39 @@ class User extends Model
     public function setCreatedAt(?string $created_at): void
     {
         $this->created_at = $created_at;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getEditedAt(): ?string
+    {
+        return $this->edited_at;
+    }
+
+    /**
+     * @param string|null $edited_at
+     */
+    public function setEditedAt(?string $edited_at): void
+    {
+        $this->edited_at = $edited_at;
+    }
+
+
+    /**
+     * @return string|null
+     */
+    public function getAccountImg(): ?string
+    {
+        return $this->account_img;
+    }
+
+    /**
+     * @param string|null $account_img
+     */
+    public function setAccountImg(?string $account_img): void
+    {
+        $this->account_img = $account_img;
     }
 
 
