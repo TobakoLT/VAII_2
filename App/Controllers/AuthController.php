@@ -6,6 +6,7 @@ use App\Config\Configuration;
 use App\Core\AControllerBase;
 use App\Core\Responses\Response;
 use App\Core\Responses\JsonResponse;
+use App\Models\Post;
 use App\Models\User;
 use Exception;
 
@@ -37,10 +38,13 @@ class AuthController extends AControllerBase
         /**
          * @throws \Exception
          */
-    public function store(): Response
+  /*  public function store(): Response
     {
+        date_default_timezone_set('Europe/Prague');
+
         $formData = $this->app->getRequest()->getPost();
         if (isset($formData['submit'])) {
+
             $username = trim($formData["username"]);
             if (empty($username)) {
                 throw new Exception("Nezadané žiadne používateľské meno");
@@ -73,12 +77,133 @@ class AuthController extends AControllerBase
             $user->setMeno($this->request()->getValue('meno'));
             $user->setEmail($email);
             $user->setPasswordHash(password_hash($password, PASSWORD_DEFAULT));
+            $oldPhoto = $user->getAccountImg();
+            if ($formData['form_name'] === 'profile_form') {
+                $user->setAccountImg($this->processUploadedFile($user));
+                if (!is_null($oldPhoto) && is_null($user->getAccountImg())) {
+                    unlink($oldPhoto);
+                }
+            }
             $user->setCreatedAt(date("Y-m-d H:i:s"));
             $user->save();
         }
         return $this->redirect("?c=auth&a=login");
     }
+*/
+    public function store(): Response
+    {
+        date_default_timezone_set('Europe/Prague');
 
+        $formData = $this->app->getRequest()->getPost();
+        if (isset($formData['submit'])) {
+            $username = trim($formData["username"]);
+            if (empty($username)) {
+                throw new Exception("Nezadané žiadne používateľské meno");
+            }
+
+            $email = filter_var($formData["email"], FILTER_VALIDATE_EMAIL);
+            if (!$email) {
+                throw new Exception("Emailová adresa nie je platná");
+            }
+
+            $password = $formData["password"];
+            $password2 = $formData["password2"];
+            if ($password !== $password2) {
+                throw new Exception("Zadané heslá sa nezhodujú");
+            }
+            if ($formData['form_name'] === 'register_form') {
+                $loginExists = count(User::getAll("username = ?", [$username])) > 0;
+                if ($loginExists) {
+                    throw new Exception("Používateľské meno už niekto používa");
+                }
+
+                $emailExists = count(User::getAll("email = ?", [$email])) > 0;
+                if ($emailExists) {
+                    throw new Exception("Zadaný email už niekto používa");
+                }
+                $user = new User();
+                $user->setUsername($username);
+                $user->setMeno($this->request()->getValue('meno'));
+                $user->setEmail($email);
+                $user->setPasswordHash(password_hash($password, PASSWORD_DEFAULT));
+                $user->setCreatedAt(date("Y-m-d H:i:s"));
+                $user->save();
+                return $this->redirect("?c=auth&a=login");
+            } else if ($formData['form_name'] === 'profile_form') {
+                $userId = $_SESSION["user"]->getId();
+                $user = User::getOne($userId);
+                if (!$user) {
+                    throw new Exception("Používateľ s daným ID neexistuje");
+                }
+                // Overiť, či sa nové používateľské meno nezhoduje s existujúcim menom
+                $usernameExists = count(User::getAll("username = ? AND id != ?", [$username, $userId])) > 0;
+                if ($usernameExists) {
+                    throw new Exception("Používateľské meno už niekto používa");
+                }
+                // Overiť, či sa nový email nezhoduje s existujúcim emailom
+                $emailExists = count(User::getAll("email = ? AND id != ?", [$email, $userId])) > 0;
+                if ($emailExists) {
+                    throw new Exception("Zadaný email už niekto používa");
+                }
+                $user->setUsername($username);
+                $user->setMeno($this->request()->getValue('meno'));
+                $user->setEmail($email);
+                if (!empty($password)) {
+                    $user->setPasswordHash(password_hash($password, PASSWORD_DEFAULT));
+                }
+
+                $oldPhoto = $user->getAccountImg();
+                $user->setAccountImg($this->processUploadedFile($user));
+                if (!is_null($oldPhoto) && is_null($user->getAccountImg())) {
+                        unlink($oldPhoto);
+                    }
+                $user->setEditedAt(date('Y-m-d H:i:s'));
+                $user->save();
+                $_SESSION["user"] = $user;
+                //unset($_SESSION["user"]);
+            }
+
+        }
+        return $this->redirect("?c=auth&a=account");
+    }
+/*
+    public function update(): Response
+    {
+        date_default_timezone_set('Europe/Prague');
+
+        $formData = $this->app->getRequest()->getPost();
+        if (isset($formData['submit'])) {
+            $userId = $_SESSION['user'];
+            $user = User::getId($userId);
+            $oldPasswordHash = $user->
+            $username = trim($formData["username"]);
+            if (!empty($username) && $username !== $user->getUsername()) {
+                $loginExists = count(User::getAll("username = ?", [$username])) > 0;
+                if ($loginExists) {
+                    throw new Exception("Používateľské meno už niekto používa");
+                }
+                $user->setUsername($username);
+            }
+
+            $email = filter_var($formData["email"], FILTER_VALIDATE_EMAIL);
+            if (!empty($email) && $email !== $user->getEmail()) {
+                $emailExists = count(User::getAll("email = ?", [$email])) > 0;
+                if ($emailExists) {
+                    throw new Exception("Zadaný email už niekto používa");
+                }
+                $user->setEmail($email);
+            }
+
+            $password = $formData["password"];
+            $password2 = $formData["password2"];
+            if (!empty($password) && !empty($password2) && $password === $password2) {
+                $user->setPasswordHash(password_hash($password, PASSWORD_DEFAULT));
+            } else {
+                $user->setPasswordHash($oldPasswordHash);
+            }
+        }
+    }
+*/
 
     /**
      * @return \App\Core\Responses\ViewResponse
@@ -98,7 +223,7 @@ class AuthController extends AControllerBase
         $logged = $this->app->getAuth()->login($login, $password);
 
         if(!$logged) {
-            return $this->json(['success' => false, 'message' => 'Zlý login alebo heslo']);
+            return $this->json(['success' => false, 'message' => 'Zlý login alebo heslo'], 401);
         }
         return $this->json(['success' => true]);
     }
@@ -113,5 +238,42 @@ class AuthController extends AControllerBase
         $this->app->getAuth()->logout();
         return $this->redirect('?c=home');
         //return $this->html();
+    }
+
+
+    /**
+     * @return \App\Core\Responses\ViewResponse
+     */
+    public function account(): Response
+    {
+        return $this->html();
+    }
+
+
+    public function delete()
+    {
+        $id = $this->request()->getValue('id');
+        $userToDelete = User::getOne($id);
+        if ($userToDelete || $userToDelete->getAccountImg()) {
+            $userToDelete->delete();
+            unlink($userToDelete->getAccountImg());
+        }
+        $this->logout();
+        return $this->redirect("?c=home");
+    }
+
+    private function processUploadedFile(User $user)
+    {
+        $photo = $this->request()->getFiles()['photo'];
+        if (!is_null($photo) && $photo['error'] == UPLOAD_ERR_OK) {
+            $targetFile = "public" . DIRECTORY_SEPARATOR . "photosAccount" . DIRECTORY_SEPARATOR . time() . "_" . $photo['name'];
+            if (move_uploaded_file($photo["tmp_name"], $targetFile)) {
+                if ($user->getId() && $user->getAccountImg()) {
+                    unlink($user->getAccountImg());
+                }
+                return $targetFile;
+            }
+        }
+        return null;
     }
 }

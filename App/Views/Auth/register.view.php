@@ -38,6 +38,7 @@ $layout = 'auth';
                         </div>
                         <div class="password-strength-indicator mt-2" id="password-strength-indicator">
                             <div class="strength"></div>
+                            <input type="hidden" name="form_name" value="register_form">
                         </div>
                         <button class="btn btn-lg btn-primary btn-block mt-3" type="submit" name="submit">Registrovať</button>
                     </form>
