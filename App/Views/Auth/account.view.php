@@ -43,10 +43,11 @@ use App\Models\User;
                         <input type="password" class="form-control" placeholder="" id="password2" name="password2" value=""></div>
                     <input type="hidden" name="form_name" value="profile_form">
                 </div>
-                <div class="mt-5 text-center"><button class="btn btn-primary profile-button" type="submit" name="submit">Save Profile</button></div>
-                <a href="?c=auth&a=delete&id=<?php echo $_SESSION["user"]->getId() ?>" class="btn btn-danger">
-                    Zmazat
-                </a>
+                <div class="mt-4 text-center"><button class="btn btn-primary profile-button" type="submit" name="submit">Save Profile</button>
+                    <a href="?c=auth&a=delete&id=<?php echo $_SESSION["user"]->getId() ?>" class="btn btn-danger">
+                        Zmazať
+                    </a></div>
+
             </div>
         </div>
     </form>
@@ -61,8 +62,6 @@ use App\Models\User;
 <script>
     inputToImg();
     viewInputToImg();
-    $(document).ready(function() {
-        $('#account_pic').tooltip();
-    });
+    tooltip();
 </script>
 
