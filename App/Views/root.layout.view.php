@@ -50,7 +50,7 @@
                 <ul class="navbar-nav ms-auto">
 
                     <li class="nav-item me-1">
-                        <a class="nav-link menu-button rounded">
+                        <a class="nav-link menu-button rounded" href="?c=auth&a=account">
                             <img src="public/images/account.webp" class="nav-logo" alt="" title="">
                         </a>
                     </li>

@@ -135,12 +135,12 @@ class AuthController extends AControllerBase
                 if (!$user) {
                     throw new Exception("Používateľ s daným ID neexistuje");
                 }
-                // Overiť, či sa nové používateľské meno nezhoduje s existujúcim menom
+
                 $usernameExists = count(User::getAll("username = ? AND id != ?", [$username, $userId])) > 0;
                 if ($usernameExists) {
                     throw new Exception("Používateľské meno už niekto používa");
                 }
-                // Overiť, či sa nový email nezhoduje s existujúcim emailom
+
                 $emailExists = count(User::getAll("email = ? AND id != ?", [$email, $userId])) > 0;
                 if ($emailExists) {
                     throw new Exception("Zadaný email už niekto používa");
@@ -152,11 +152,15 @@ class AuthController extends AControllerBase
                     $user->setPasswordHash(password_hash($password, PASSWORD_DEFAULT));
                 }
 
-                $oldPhoto = $user->getAccountImg();
-                $user->setAccountImg($this->processUploadedFile($user));
-                if (!is_null($oldPhoto) && is_null($user->getAccountImg())) {
+                /*$oldPhoto = $user->getAccountImg();*/
+                $newPhoto = $this->processUploadedFile($user);
+                if ($newPhoto != null) {
+                    $user->setAccountImg($newPhoto);
+                }
+                /*$user->setAccountImg($this->processUploadedFile($user));*/
+                /*if (!is_null($oldPhoto) && is_null($user->getAccountImg())) {
                         unlink($oldPhoto);
-                    }
+                    }*/
                 $user->setEditedAt(date('Y-m-d H:i:s'));
                 $user->save();
                 $_SESSION["user"] = $user;
