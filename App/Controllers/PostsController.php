@@ -46,14 +46,16 @@ class PostsController extends AControllerBase
         $oldPhoto = $post->getObrazok();
 
         $post = ( $id ? Post::getOne($id) : new Post());
-        $post->setAutor($this->request()->getValue('autor'));
+        $post->setAutor($_SESSION["user"]->getMeno());
         $post->setNadpis($this->request()->getValue('nadpis'));
         $post->setDatum(date("Y-m-d"));
         $post->setClanok($this->request()->getValue('clanok'));
-        $post->setObrazok($this->processUploadedFile($post));
-        if (!is_null($oldPhoto) && is_null($post->getObrazok())) {
-            unlink($oldPhoto);
+        //$post->setObrazok($this->processUploadedFile($post));
+        $newPhoto = $this->processUploadedFile($post);
+        if ($newPhoto != null) {
+            $post->setObrazok($newPhoto);
         }
+
         $post->save();
         return $this->redirect("?c=posts");
     }

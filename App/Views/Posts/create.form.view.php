@@ -11,7 +11,7 @@
 
             <div class="mb-3">
                 <label for="FormName" class="form-label">Meno autora</label>
-                <input type="text" class="form-control" id="FormName" value="<?php echo $data->getAutor() ?>">
+                <input type="text" style="font-weight: bold" class="form-control" id="FormName" value="<?php echo $_SESSION["user"]->getMeno() ?>" readonly>
             </div>
 
             <label>Nadpis:
