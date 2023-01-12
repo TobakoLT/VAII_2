@@ -32,7 +32,7 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="collapsibleNavbar">
-            <ul class="navbar-nav sticky-top font-size ms-auto mb-2 mb-sm-0 ">
+            <ul class="navbar-nav sticky-top font-size ms-auto mb-2 mb-sm-0">
                 <li class="nav-item " >
                     <a class="nav-link active menu-button rounded me-1" aria-current="page" href="?c=home&a=index">ÚVOD</a>
                 </li>
@@ -45,9 +45,12 @@
                 <li class="nav-item ">
                     <a class="nav-link active menu-button rounded" href="?c=home&a=contact">KONTAKT</a>
                 </li>
+                <li class="nav-item ">
+                    <a class="nav-link active menu-button rounded" href="?c=forumThemes&a=themes">FÓRUM</a>
+                </li>
             </ul>
             <?php if ($auth->isLogged()) { ?>
-                <ul class="navbar-nav ms-auto">
+                <ul class="navbar-nav ms-auto ">
 
                     <li class="nav-item me-1">
                         <a class="nav-link menu-button rounded" href="?c=auth&a=account">
