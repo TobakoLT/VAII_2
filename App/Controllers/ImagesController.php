@@ -43,12 +43,12 @@ class ImagesController extends AControllerBase
     {
         $id = $this->request()->getValue('id');
         $image = ( $id ? Image::getOne($id) : new Image());
-        $oldPhoto = $image->getImg();
+        //$oldPhoto = $image->getImg();
 
         $image->setText($this->request()->getValue('text'));
-        $image->setImg($this->processUploadedFile($image));
-        if (!is_null($oldPhoto) && is_null($image->getImg())) {
-            unlink($oldPhoto);
+        $newPhoto = $this->processUploadedFile($image);
+        if ($newPhoto != null) {
+            $image->setImg($newPhoto);
         }
         $image->save();
         return $this->redirect("?c=images");
