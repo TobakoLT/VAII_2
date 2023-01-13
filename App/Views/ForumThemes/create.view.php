@@ -1,4 +1,4 @@
-<button class="btn btn-secondary" onclick="window.location.href='?c=forumThemes&a=themes'">Prihlásenie</button>
+<button class="btn btn-secondary" onclick="window.location.href='?c=forumThemes&a=themes'">Zoznam tém</button>
 <div class="container bg-white p-5 rounded">
     <h2>Vytvorte novú tému.</h2>
     <form action="?c=forumThemes&a=store" method="post" enctype="multipart/form-data">
