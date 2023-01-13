@@ -6,10 +6,10 @@ use App\Core\Model;
 
 class ForumTheme extends Model
 {
-    protected ?int $id;
-    protected ?string $nazov;
-    protected ?string $popis;
-    protected ?string $created_at;
+    protected ?int $id = 0;
+    protected ?string $nazov = "";
+    protected ?string $popis = "";
+    protected ?string $created_at = "";
 
     /**
      * @return int|null
