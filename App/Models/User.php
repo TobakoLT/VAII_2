@@ -12,8 +12,8 @@ class User extends Model
     protected ?string $meno = "";
     protected ?string $password_hash = "";
     protected ?string $account_img = "";
-    protected ?string $created_at = "";
-    protected ?string $edited_at = "";
+    protected ?string $created_at;
+    protected ?string $edited_at;
 
     /**
      * @return int|null
