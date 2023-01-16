@@ -38,9 +38,9 @@ use App\Models\User;
                     <div class="col-md-12"><label class="labels">Celé meno</label>
                         <input type="text" class="form-control" placeholder="" id="meno" name="meno"value="<?php echo $_SESSION["user"]->getMeno() ?>"></div>
                     <div class="col-md-12"><label class="labels">Heslo</label>
-                        <input type="password" class="form-control" placeholder="Heslo" id="password" name="password" value=""></div>
+                        <input type="password" class="form-control" placeholder="Heslo" id="password" name="password" minlength="3" maxlength="30"></div>
                     <div class="col-md-12"><label class="labels">Zopakuj heslo</label>
-                        <input type="password" class="form-control" placeholder="" id="password2" name="password2" value=""></div>
+                        <input type="password" class="form-control" placeholder="" id="password2" name="password2" maxlength="30"></div>
                     <input type="hidden" name="form_name" value="profile_form">
                 </div>
                 <div class="mt-4 text-center"><button class="btn btn-primary profile-button" type="submit" name="submit">Save Profile</button>

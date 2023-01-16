@@ -161,7 +161,7 @@ class AuthController extends AControllerBase
                 /*if (!is_null($oldPhoto) && is_null($user->getAccountImg())) {
                         unlink($oldPhoto);
                     }*/
-                $user->setEditedAt(date('Y-m-d H:i:s'));
+                $user->setEditedAt(date("Y-m-d H:i:s"));
                 $user->save();
                 $_SESSION["user"] = $user;
                 //unset($_SESSION["user"]);
@@ -227,7 +227,7 @@ class AuthController extends AControllerBase
         $logged = $this->app->getAuth()->login($login, $password);
 
         if(!$logged) {
-            return $this->json(['success' => false, 'message' => 'Zlý login alebo heslo'], 401);
+            return $this->json(['success' => false, 'message' => 'Zlý login alebo heslo']);
         }
         return $this->json(['success' => true]);
     }
