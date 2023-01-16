@@ -37,17 +37,8 @@ class ForumThemesController extends AControllerBase
      */
     public function index(): Response
     {
-
         $forumThemes = ForumTheme::getAll();
         return $this->html($forumThemes);
-    }
-
-    /**
-     * @return Response
-     */
-    public function themes(): Response
-    {
-        return $this->html();
     }
 
     /**
@@ -61,7 +52,7 @@ class ForumThemesController extends AControllerBase
         if ($themeToDelete) {
             $themeToDelete->delete();
         }
-        return $this->redirect("?c=forumThemes&a=themes");
+        return $this->redirect("?c=forumThemes");
     }
 
     /**
@@ -70,15 +61,21 @@ class ForumThemesController extends AControllerBase
      */
     public function store()
     {
+        date_default_timezone_set('Europe/Prague');
         $id = $this->request()->getValue('id');
         $theme = ($id ? ForumTheme::getOne($id) : new ForumTheme());
 
-        $theme->setNazov($this->request()->getValue('title'));
+        $title = trim($this->request()->getValue('title'));
+        $title = htmlspecialchars($title);
+        if (strlen($title) > 50 || strlen($title) < 3) {
+            throw new Exception("Error: Názov témy musí mať maximálne 50 znakov a minimálne 3");
+        }
+        $theme->setNazov($title);
         $theme->setCreatedAt(date("Y-m-d"));
         $theme->setPopis($this->request()->getValue('description'));
 
         $theme->save();
-        return $this->redirect("?c=forumthemes");
+        return $this->redirect("?c=forumThemes");
     }
 
     /**
@@ -86,7 +83,7 @@ class ForumThemesController extends AControllerBase
      */
     public function create()
     {
-        return $this->html(new ForumTheme(), viewName: 'create');
+        return $this->html(new ForumTheme(), viewName: 'create.form');
     }
 
     /**
@@ -97,6 +94,6 @@ class ForumThemesController extends AControllerBase
     {
         $id = $this->request()->getValue('id');
         $themeToEdit = ForumTheme::getOne($id);
-        return $this->html($themeToEdit, viewName: 'create');
+        return $this->html($themeToEdit, viewName: 'create.form');
     }
 }

@@ -42,6 +42,14 @@
 .navbar-brand img {
     width: 50px;
 }
+
+.bottom-buttons {
+    position: fixed;
+    bottom: 0; /* 0px od dolného okraja obrazovky */
+    left: 0.3%; /* 0px od ľavého okraja obrazovky */
+    width: 100%; /* šírka tlačidiel bude rovná šírke obrazovky */
+}
+
 body{
     background: linear-gradient(
             45deg,

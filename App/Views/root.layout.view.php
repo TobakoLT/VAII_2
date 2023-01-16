@@ -46,7 +46,7 @@
                     <a class="nav-link active menu-button rounded" href="?c=home&a=contact">KONTAKT</a>
                 </li>
                 <li class="nav-item ">
-                    <a class="nav-link active menu-button rounded" href="?c=forumThemes&a=themes">FÓRUM</a>
+                    <a class="nav-link active menu-button rounded" href="?c=forumThemes">FÓRUM</a>
                 </li>
             </ul>
             <?php if ($auth->isLogged()) { ?>

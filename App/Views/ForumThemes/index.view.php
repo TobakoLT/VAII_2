@@ -16,15 +16,15 @@ use App\Models\ForumTheme;
                 </div>
                 <div class="card-body">
                     <p class="card-text"><?php echo $forumTheme->getPopis() ?></p>
-                    <a href="#" class="btn btn-primary">Zobraziť tému</a>
+                    <a href="?c=forumPosts&a=index&themeId=<?= $forumTheme->getId() ?>" class="btn btn-primary">Zobraziť tému</a>
                 </div>
-            </div>
-
-            <div class="col-md-4">
-                <?php if($auth->isLogged()) {?>
-                <a class="btn btn-primary my-3" href="?c=forumThemes&a=create">Nová téma.</a>
-                <?php } ?>
             </div>
         </div>
     </div>
 <?php } ?>
+    <div class="col-md-4">
+        <?php if($auth->isLogged()) {?>
+            <a class="btn btn-primary my-3" href="?c=forumThemes&a=create">Nová téma</a>
+        <?php } ?>
+        <a class="btn btn-primary my-3" href="?c=forumPosts">Všetky príspevky</a>
+    </div>
