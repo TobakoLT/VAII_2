@@ -6,12 +6,12 @@ use App\Core\Model;
 
 class ForumPost extends Model
 {
-    protected ?int $id;
-    protected ?int $theme_id;
-    protected ?string $post_text;
-    protected ?string $author;
+    protected ?int $id = 0;
+    protected ?int $theme_id = 0;
+    protected ?string $post_text = "";
+    protected ?string $author = "";
     protected ?string $created_at;
-    protected ?string $attachment_image;
+    protected ?string $attachment_image = "";
 
     /**
      * @return int|null
