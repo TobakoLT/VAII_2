@@ -41,6 +41,7 @@ class PostsController extends AControllerBase
 
     public function store()
     {
+        date_default_timezone_set('Europe/Prague');
         $id = $this->request()->getValue('id');
         $post = ($id ? Post::getOne($id) : new Post());
         $oldPhoto = $post->getObrazok();
