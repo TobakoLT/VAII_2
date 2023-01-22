@@ -36,60 +36,8 @@ class AuthController extends AControllerBase
     }
 
         /**
-         * @throws \Exception
+         * @throws Exception
          */
-  /*  public function store(): Response
-    {
-        date_default_timezone_set('Europe/Prague');
-
-        $formData = $this->app->getRequest()->getPost();
-        if (isset($formData['submit'])) {
-
-            $username = trim($formData["username"]);
-            if (empty($username)) {
-                throw new Exception("Nezadané žiadne používateľské meno");
-            }
-
-            $loginExists = count(User::getAll("username = ?", [$username])) > 0;
-            if ($loginExists) {
-                throw new Exception("Používateľské meno už niekto používa");
-            }
-
-            $email = filter_var($formData["email"], FILTER_VALIDATE_EMAIL);
-            if (!$email) {
-                throw new Exception("Emailová adresa nie je platná");
-            }
-
-            $emailExists = count(User::getAll("email = ?", [$email])) > 0;
-            if ($emailExists) {
-                throw new Exception("Zadaný email už niekto používa");
-            }
-
-
-            $password = $formData["password"];
-            $password2 = $formData["password2"];
-            if ($password !== $password2) {
-                throw new Exception("Zadané heslá sa nezhodujú");
-            }
-
-            $user = new User();
-            $user->setUsername($username);
-            $user->setMeno($this->request()->getValue('meno'));
-            $user->setEmail($email);
-            $user->setPasswordHash(password_hash($password, PASSWORD_DEFAULT));
-            $oldPhoto = $user->getAccountImg();
-            if ($formData['form_name'] === 'profile_form') {
-                $user->setAccountImg($this->processUploadedFile($user));
-                if (!is_null($oldPhoto) && is_null($user->getAccountImg())) {
-                    unlink($oldPhoto);
-                }
-            }
-            $user->setCreatedAt(date("Y-m-d H:i:s"));
-            $user->save();
-        }
-        return $this->redirect("?c=auth&a=login");
-    }
-*/
     public function store(): Response
     {
         date_default_timezone_set('Europe/Prague');
@@ -152,62 +100,19 @@ class AuthController extends AControllerBase
                     $user->setPasswordHash(password_hash($password, PASSWORD_DEFAULT));
                 }
 
-                /*$oldPhoto = $user->getAccountImg();*/
                 $newPhoto = $this->processUploadedFile($user);
                 if ($newPhoto != null) {
                     $user->setAccountImg($newPhoto);
                 }
-                /*$user->setAccountImg($this->processUploadedFile($user));*/
-                /*if (!is_null($oldPhoto) && is_null($user->getAccountImg())) {
-                        unlink($oldPhoto);
-                    }*/
                 $user->setEditedAt(date("Y-m-d H:i:s"));
                 $user->save();
                 $_SESSION["user"] = $user;
-                //unset($_SESSION["user"]);
             }
 
         }
         return $this->redirect("?c=auth&a=account");
     }
-/*
-    public function update(): Response
-    {
-        date_default_timezone_set('Europe/Prague');
 
-        $formData = $this->app->getRequest()->getPost();
-        if (isset($formData['submit'])) {
-            $userId = $_SESSION['user'];
-            $user = User::getId($userId);
-            $oldPasswordHash = $user->
-            $username = trim($formData["username"]);
-            if (!empty($username) && $username !== $user->getUsername()) {
-                $loginExists = count(User::getAll("username = ?", [$username])) > 0;
-                if ($loginExists) {
-                    throw new Exception("Používateľské meno už niekto používa");
-                }
-                $user->setUsername($username);
-            }
-
-            $email = filter_var($formData["email"], FILTER_VALIDATE_EMAIL);
-            if (!empty($email) && $email !== $user->getEmail()) {
-                $emailExists = count(User::getAll("email = ?", [$email])) > 0;
-                if ($emailExists) {
-                    throw new Exception("Zadaný email už niekto používa");
-                }
-                $user->setEmail($email);
-            }
-
-            $password = $formData["password"];
-            $password2 = $formData["password2"];
-            if (!empty($password) && !empty($password2) && $password === $password2) {
-                $user->setPasswordHash(password_hash($password, PASSWORD_DEFAULT));
-            } else {
-                $user->setPasswordHash($oldPasswordHash);
-            }
-        }
-    }
-*/
 
     /**
      * @return \App\Core\Responses\ViewResponse
