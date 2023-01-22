@@ -22,6 +22,13 @@ class ForumPostsController extends AControllerBase
         return $this->html(['posts' => $posts, 'themeId' => $themeId]);
     }
 
+    public function showAllPosts(): Response
+    {
+        $themeId = NULL;
+        $forumPosts = ForumPost::getAll();
+        return $this->html(['posts' => $forumPosts, 'themeId' => $themeId], viewName: 'index');
+    }
+
     public function authorize($action): bool
     {
         switch ($action) {
@@ -43,7 +50,6 @@ class ForumPostsController extends AControllerBase
         date_default_timezone_set('Europe/Prague');
         $id = $this->request()->getValue('id');
         $post = ($id ? ForumPost::getOne($id) : new ForumPost());
-
         $post->setThemeId($this->request()->getValue('theme_id'));
         $post->setPostText($this->request()->getValue('post_text'));
         $post->setAuthor($_SESSION['user']->getUsername());
@@ -68,12 +74,6 @@ class ForumPostsController extends AControllerBase
         $id = $this->request()->getValue('id');
         $postToEdit = ForumPost::getOne($id);
         return $this->html($postToEdit, viewName: 'create.form');
-    }
-
-    public function showAllPosts(): Response
-    {
-        $forumPosts = ForumPost::getAll();
-        return $this->html($forumPosts, viewName: 'index');
     }
 
     private function processUploadedFile(ForumPost $post)
