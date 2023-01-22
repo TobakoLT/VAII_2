@@ -10,24 +10,36 @@ use App\Models\ForumTheme;
 
 <div class="container bg-white rounded border border-dark my-5">
     <?php if (!$data['themeId'] == NULL) { ?>
-    <h2 class="text-center fw-bold pt-2"><?php echo ForumTheme::getOne($data['themeId'])->getNazov() ?></h2>
+        <h2 class="text-center fw-bold pt-2"><?php echo ForumTheme::getOne($data['themeId'])->getNazov() ?></h2>
     <?php } else { ?>
-    <h2 class="text-center fw-bold pt-2">Všetky príspevky</h2>
+        <h2 class="text-center fw-bold pt-2">Všetky príspevky</h2>
     <?php } ?>
     <div class="row">
         <div class="col-md-12">
-            <?php foreach ($data['posts'] as $post) { ?>
-            <!--<div style="margin-top: 15px;"></div>-->
+            <?php
+            $imageId = 1;
+            foreach ($data['posts'] as $post) { ?>
+                <!--<div style="margin-top: 15px;"></div>-->
                 <div class="card mb-3 border border-2 border-dark">
                     <div class="card-header">
-                        <small class="fw-bold"><?php echo $post->getAuthor()?></small>
+                        <small class="fw-bold"><?php echo $post->getAuthor() ?></small>
                     </div>
                     <div class="card-body">
                         <p><?= $post->getPostText() ?></p>
+                        <?php if ($post->getAttachmentImage()) { ?>
+                            <div class="mb-1">
+                                <button class="spoiler-button" data-target="<?= $imageId ?>"
+                                        onclick="toggleImage(<?= $imageId ?>)">Zobraziť prílohu
+                                </button>
+                                <button class="hide-spoiler-button" data-target="<?= $imageId ?>"
+                                        onclick="toggleImage(<?= $imageId ?>)" style="display: none">Skryť
+                                </button>
+                            </div>
+                            <img id="<?= $imageId ?>" class="img-fluid" src="<?= $post->getAttachmentImage() ?>"
+                                 style="display: none" alt="">
+                        <?php } ?>
 
-                        <button class="spoiler-button btn-sm" data-img-src="<?= $post->getAttachmentImage() ?>">Zobraziť prílohu</button>
-                        <img class="spoiler-image" style="display: none" alt="">
-                        <button class="hide-spoiler-button btn-sm" style="display: none">Skryť</button>
+                        <?php $imageId++ ?>
                     </div>
                     <div class="card-footer">
                         <small><?php echo $post->getCreatedAt() ?></small>
@@ -46,5 +58,5 @@ use App\Models\ForumTheme;
 </div>
 
 <script>
-    toggleSpoiler('.spoiler-button', '.spoiler-image', '.hide-spoiler-button');
+
 </script>
