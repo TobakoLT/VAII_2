@@ -1,6 +1,6 @@
-<button class="btn btn-secondary" onclick="window.location.href='?c=forumThemes'">Zoznam tém</button>
+<button class="btn btn-secondary mb-3" onclick="window.location.href='?c=forumThemes'">Zoznam tém</button>
 <div class="container bg-white p-5 rounded">
-    <h2>Vytvorte novú tému.</h2>
+    <h2>Vytvorte novú tému</h2>
     <form action="?c=forumThemes&a=store" method="post" enctype="multipart/form-data">
         <?php /** @var \App\Models\ForumTheme $data */
         if ($data->getId()) { ?>
@@ -9,13 +9,15 @@
         <div class="form-group row">
             <label for="title" class="col-12 col-md-3 col-form-label">Názov</label>
             <div class="col-12 col-md-9">
-                <input type="text" class="form-control" id="title" name="title" placeholder="Zadajte názov" minlength="3" maxlength="80" required autofocus>
+                <input type="text" class="form-control" id="title" name="title" placeholder="Zadajte názov"
+                       minlength="3" maxlength="80" required autofocus>
             </div>
         </div>
         <div class="form-group row">
             <label for="description" class="col-12 col-md-3 col-form-label">Popis</label>
             <div class="col-12 col-md-9 mt-1">
-                <textarea class="form-control" id="description" name="description" rows="3" placeholder="Krátky popis čím sa daná téma zaoberá"></textarea>
+                <textarea class="form-control" id="description" name="description" rows="3"
+                          placeholder="Krátky popis čím sa daná téma zaoberá" required></textarea>
             </div>
         </div>
         <div class="form-group row">
