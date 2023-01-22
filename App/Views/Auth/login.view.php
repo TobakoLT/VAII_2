@@ -15,12 +15,12 @@ $layout = 'auth';
                     <form class="form-signin">
                         <div class="form-label-group mb-3">
                             <input name="username" type="text" id="username" class="form-control" placeholder="Login"
-                                   required autofocus>
+                                   minlength="4" maxlength="25" required autofocus>
                         </div>
 
                         <div class="form-label-group mb-3">
                             <input name="password" type="password" id="password" class="form-control"
-                                   placeholder="Password" required>
+                                   placeholder="Password" minlength="8" maxlength="30" required>
                         </div>
                         <div class="text-center text-danger mb-3" id="error-message"></div>
                         <div class="text-center">
