@@ -5,6 +5,7 @@ use App\Config\Configuration;
 use App\Core\AControllerBase;
 use App\Core\Responses\Response;
 use App\Core\Responses\JsonResponse;
+use App\Models\ForumPost;
 use App\Models\ForumTheme;
 use App\Models\User;
 use Exception;
@@ -42,7 +43,7 @@ class ForumThemesController extends AControllerBase
     }
 
     /**
-     * @return \App\Core\Responses\RedirectResponse
+     * @return \App\Core\Responses\JsonResponse
      * @throws Exception
      */
     public function delete()
@@ -50,9 +51,15 @@ class ForumThemesController extends AControllerBase
         $id = $this->request()->getValue('id');
         $themeToDelete = ForumTheme::getOne($id);
         if ($themeToDelete) {
+            $postsToDelete = ForumPost::getAll("theme_id = ?", [$id]);
+            foreach ($postsToDelete as $post) {
+                $post->delete();
+            }
             $themeToDelete->delete();
+            echo 'Téma bola úspešne vymazaná';
+        } else {
+            echo 'Téma sa nepodarilo vymazať';
         }
-        return $this->redirect("?c=forumThemes");
     }
 
     /**
@@ -71,7 +78,7 @@ class ForumThemesController extends AControllerBase
             throw new Exception("Error: Názov témy musí mať maximálne 50 znakov a minimálne 3");
         }
         $theme->setNazov($title);
-        $theme->setCreatedAt(date("Y-m-d"));
+        $theme->setCreatedAt(date("Y-m-d H:i:s"));
         $theme->setPopis($this->request()->getValue('description'));
 
         $theme->save();
