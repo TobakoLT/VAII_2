@@ -10,14 +10,14 @@
             <label for="title" class="col-12 col-md-3 col-form-label">Názov</label>
             <div class="col-12 col-md-9">
                 <input type="text" class="form-control" id="title" name="title" placeholder="Zadajte názov"
-                       minlength="3" maxlength="80" required autofocus>
+                       minlength="3" maxlength="80" value="<?= $data->getNazov() ?>" required autofocus>
             </div>
         </div>
         <div class="form-group row">
             <label for="description" class="col-12 col-md-3 col-form-label">Popis</label>
             <div class="col-12 col-md-9 mt-1">
                 <textarea class="form-control" id="description" name="description" rows="3"
-                          placeholder="Krátky popis čím sa daná téma zaoberá" required></textarea>
+                          placeholder="Krátky popis čím sa daná téma zaoberá" required><?= $data->getPopis() ?></textarea>
             </div>
         </div>
         <div class="form-group row">
