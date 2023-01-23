@@ -9,7 +9,7 @@ use App\Models\ForumTheme;
 ?>
 
 <div class="container bg-white rounded border border-dark my-5">
-    <?php if (!$data['themeId'] == NULL) { ?>
+    <?php if ($data['themeId'] != NULL) { ?>
         <h2 class="text-center fw-bold pt-2"><?php echo ForumTheme::getOne($data['themeId'])->getNazov() ?></h2>
     <?php } else { ?>
         <h2 class="text-center fw-bold pt-2">Všetky príspevky</h2>
@@ -28,7 +28,7 @@ use App\Models\ForumTheme;
                         <p><?= $post->getPostText() ?></p>
                         <?php if ($post->getAttachmentImage()) { ?>
                             <div class="mb-1">
-                                <button class="spoiler-button" data-target="<?= $imageId ?>"
+                                <button class="spoiler-button simpleHoverRed" data-target="<?= $imageId ?>"
                                         onclick="toggleImage(<?= $imageId ?>)">Zobraziť prílohu
                                 </button>
                                 <button class="hide-spoiler-button" data-target="<?= $imageId ?>"
@@ -37,12 +37,24 @@ use App\Models\ForumTheme;
                             </div>
                             <img id="<?= $imageId ?>" class="img-fluid" src="<?= $post->getAttachmentImage() ?>"
                                  style="display: none" alt="">
+                            <?php $imageId++ ?>
                         <?php } ?>
-
-                        <?php $imageId++ ?>
                     </div>
                     <div class="card-footer">
-                        <small><?php echo $post->getCreatedAt() ?></small>
+                        <small>
+                            <?php echo $post->getCreatedAt() ?>
+                        </small>
+                        <small class="float-end fw-semibold">
+                            <?php if ($_SESSION["user"]->getUsername() == $post->getAuthor()) { ?>
+                                <a href="?c=forumPosts&a=delete&id=<?php echo $post->getId() ?>" class="me-2">
+                                    Zmazať
+                                </a>
+
+                                <a href="?c=forumPosts&a=edit&id=<?php echo $post->getId() ?>" class="me-2">
+                                    Upraviť
+                                </a>
+                            <?php } ?>
+                        </small>
                     </div>
                 </div>
             <?php } ?>
