@@ -69,11 +69,23 @@ class ForumPostsController extends AControllerBase
         return $this->html(['post' => new ForumPost(),'id' => $id], viewName: 'create.form');
     }
 
+    public function delete()
+    {
+        $id = $this->request()->getValue('id');
+        $theme_id = $this->request()->getValue('theme_id');
+        $postToDelete = ForumPost::getOne($id);
+        if ($postToDelete) {
+            $postToDelete->delete();
+        }
+        return $this->redirect('?c=forumPosts&a=index&themeId=' . $theme_id);
+    }
+
+
     public function edit()
     {
         $id = $this->request()->getValue('id');
         $postToEdit = ForumPost::getOne($id);
-        return $this->html($postToEdit, viewName: 'create.form');
+        return $this->html(['post' => $postToEdit], viewName: 'create.form');
     }
 
     private function processUploadedFile(ForumPost $post)
