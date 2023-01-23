@@ -35,7 +35,7 @@ use App\Models\User;
                     <div class="d-flex justify-content-between align-items-center mb-3">
                         <h4 class="text-right">Profile Settings</h4>
                         <?php if ($_SESSION["user"]->getAdmin()) { ?>
-                        <h6 class="text-danger fw-bold text-decoration-underline">Účet administrátora</h6>
+                            <h6 class="text-danger fw-bold text-decoration-underline">Účet administrátora</h6>
                         <?php } ?>
                     </div>
                     <div class="row mt-5">
@@ -63,7 +63,8 @@ use App\Models\User;
                         <button class="btn btn-primary profile-button" type="submit" name="submit">Save Profile</button>
                         <a href="?c=auth&a=delete&id=<?php echo $_SESSION["user"]->getId() ?>" class="btn btn-danger">
                             Zmazať
-                        </a></div>
+                        </a>
+                    </div>
 
                 </div>
             </div>
@@ -81,5 +82,6 @@ use App\Models\User;
     inputToImg();
     viewInputToImg();
     tooltip();
+    defaultAccImg();
 </script>
 
