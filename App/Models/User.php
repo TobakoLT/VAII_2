@@ -14,6 +14,7 @@ class User extends Model
     protected ?string $account_img = "";
     protected ?string $created_at;
     protected ?string $edited_at;
+    protected ?int $admin = 0;
 
     /**
      * @return int|null
@@ -142,6 +143,14 @@ class User extends Model
     public function setAccountImg(?string $account_img): void
     {
         $this->account_img = $account_img;
+    }
+
+    /**
+     * @return int|null
+     */
+    public function getAdmin(): ?int
+    {
+        return $this->admin;
     }
 
 
