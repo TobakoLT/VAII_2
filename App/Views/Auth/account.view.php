@@ -64,6 +64,7 @@ use App\Models\User;
                         <a href="?c=auth&a=delete&id=<?php echo $_SESSION["user"]->getId() ?>" class="btn btn-danger">
                             Zmazať
                         </a>
+                        <button class="btn btn-danger delete-profile" data-id="<?php echo $_SESSION["user"]->getId() ?>">Zmazať confirm</button>
                     </div>
 
                 </div>
@@ -83,5 +84,6 @@ use App\Models\User;
     viewInputToImg();
     tooltip();
     defaultAccImg();
+    profileDeleteConfirm()
 </script>
 
