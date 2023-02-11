@@ -8,13 +8,16 @@ use App\Models\ForumTheme;
 <div class="container my-5 bg-white rounded border border-dark">
     <h1 class="text-center pt-2">Témy fóra</h1>
     <?php
-    foreach ($data as $forumTheme) {
+    foreach ($data["forumThemes"] as $forumTheme) {
         ?>
-        <div class="row">
+        <div class="row" id="theme-<?= $forumTheme->getId() ?>">
             <div class="col-md-12">
                 <div class="card mb-3  border border-2 border-dark">
                     <div class="card-header">
-                        <h5><?php echo $forumTheme->getNazov() ?></h5>
+                        <div class="row">
+                        <h5 class="col"><?php echo $forumTheme->getNazov() ?></h5>
+                        <h6 class="col text-end">Počet príspevkov: <?= $data["postCount"][$forumTheme->getId()] ?></h6>
+                        </div>
                     </div>
                     <div class="card-body">
                         <p class="card-text"><?php echo $forumTheme->getPopis() ?></p>
