@@ -22,16 +22,19 @@
                        value="<?php echo $data->getNadpis() ?>" minlength="10" maxlength="50" required>
             </label>
 
-            <label>Text clánku:
-                <input class="rounded form-control" size="120%" type="text" name="clanok"
-                       value="<?php echo $data->getClanok() ?>" required minlength="100" maxlength="1000">
-            </label>
+            <label>Text článku:</label>
+            <textarea class="rounded form-control" rows="7" cols="50" name="clanok" required minlength="100"
+                      maxlength="1000"><?php echo $data->getClanok() ?></textarea>
 
-            <label>Obrázok:
-                <input class="rounded" size="120%" type="file" name="photo" id="photo">
-            </label>
+            <label>Obrázok:</label>
+            <div class="text-danger" id="img-input-error"></div>
+            <input class="form-control rounded" formenctype="multipart/form-data" type="file" name="photo" id="photo">
             <input class="rounded mt-1" type="submit" value="Odoslať">
         </form>
 
     </div>
 </div>
+
+<script>
+    imageInput2();
+</script>
