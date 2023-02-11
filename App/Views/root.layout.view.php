@@ -24,29 +24,30 @@
     <div class="container-fluid ">
         <div class="">
             <a class="navbar-brand" href="?c=home">
-                <img src="public/images/motologo1.png"  alt="" title="<?= \App\Config\Configuration::APP_NAME ?>">
+                <img src="public/images/motologo1.png" alt="" title="<?= \App\Config\Configuration::APP_NAME ?>">
             </a>
         </div>
 
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="collapsibleNavbar">
+        <div class="collapse navbar-collapse <?php if ($auth->isLogged()) { ?>  <?php } ?> " id="collapsibleNavbar">
             <ul class="navbar-nav sticky-top font-size ms-auto mb-2 mb-sm-0 float-start">
-                <li class="nav-item " >
-                    <a class="nav-link active menu-button rounded me-1" aria-current="page" href="?c=home&a=index">ÚVOD</a>
+                <li class="nav-item ">
+                    <a class="nav-link active menu-button rounded me-1" aria-current="page"
+                       href="?c=home&a=index">ÚVOD</a>
                 </li>
-                <li class="nav-item " >
+                <li class="nav-item ">
                     <a class="nav-link active menu-button rounded me-1" href="?c=home&a=gallery">GALÉRIA</a>
                 </li>
                 <li class="nav-item ">
                     <a class="nav-link active menu-button rounded me-1" href="?c=home&a=info">INFORMÁCIE</a>
                 </li>
                 <li class="nav-item ">
-                    <a class="nav-link active menu-button rounded" href="?c=home&a=contact">KONTAKT</a>
+                    <a class="nav-link active menu-button rounded me-1" href="?c=home&a=contact">KONTAKT</a>
                 </li>
                 <li class="nav-item ">
-                    <a class="nav-link active menu-button rounded" href="?c=forumThemes">FÓRUM</a>
+                    <a class="nav-link active menu-button rounded " href="?c=forumThemes">FÓRUM</a>
                 </li>
             </ul>
             <?php if ($auth->isLogged()) { ?>
@@ -65,13 +66,12 @@
                 </ul>
             <?php } else { ?>
                 <ul class="navbar-nav ms-auto">
-                    <ul class="navbar-nav ms-auto">
-                        <li class="nav-item">
-                            <a class="nav-link menu-button rounded" href="<?= \App\Config\Configuration::LOGIN_URL ?>">
-                                <img src="public/images/login.png" class="nav-logo" alt="" title="<?= \App\Config\Configuration::APP_NAME ?>">
-                            </a>
-                        </li>
-                    </ul>
+                    <li class="nav-item">
+                        <a class="nav-link menu-button rounded" href="<?= \App\Config\Configuration::LOGIN_URL ?>">
+                            <img src="public/images/login.png" class="nav-logo" alt=""
+                                 title="<?= \App\Config\Configuration::APP_NAME ?>">
+                        </a>
+                    </li>
                 </ul>
             <?php } ?>
         </div>
