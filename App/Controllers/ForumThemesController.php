@@ -69,22 +69,6 @@ class ForumThemesController extends AControllerBase
     }
 
     /**
-     * @throws Exception
-     */
-    public function countPostsInThemes()
-    {
-        $themes = ForumTheme::getAll();
-        $postCount = [];
-
-        foreach ($themes as $theme) {
-            $posts = ForumPost::getAll("theme_id = ?", [$theme->getId()]);
-            $postCount[$theme->getId()] = count($posts);
-        }
-
-        return $this->html($postCount);
-    }
-
-    /**
      * @return \App\Core\Responses\RedirectResponse
      * @throws Exception
      */
@@ -95,14 +79,19 @@ class ForumThemesController extends AControllerBase
         $theme = ($id ? ForumTheme::getOne($id) : new ForumTheme());
 
         $title = trim($this->request()->getValue('title'));
-        $title = htmlspecialchars($title);
+        $title = htmlspecialchars($title, ENT_QUOTES, 'UTF-8');
         if (strlen($title) > 50 || strlen($title) < 3) {
-            throw new Exception("Error: Názov témy musí mať maximálne 50 znakov a minimálne 3");
+            throw new Exception("Error: Názov témy moze mať maximálne 50 znakov a minimálne 3");
         }
         $theme->setNazov($title);
-        $theme->setCreatedAt(date("Y-m-d H:i:s"));
-        $theme->setPopis($this->request()->getValue('description'));
 
+        $description = trim($this->request()->getValue('description'));
+        $description = htmlspecialchars($description, ENT_QUOTES, 'UTF-8');
+        if (strlen($description) > 400 || strlen($description) < 10) {
+            throw new Exception("Error: Popis témy moze mať maximálne 400 znakov a minimálne 10");
+        }
+        $theme->setPopis($description);
+        $theme->setCreatedAt(date("Y-m-d H:i:s"));
         $theme->save();
         return $this->redirect("?c=forumThemes");
     }

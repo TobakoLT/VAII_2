@@ -51,7 +51,16 @@ class ForumPostsController extends AControllerBase
         $id = $this->request()->getValue('id');
         $post = ($id ? ForumPost::getOne($id) : new ForumPost());
         $post->setThemeId($this->request()->getValue('theme_id'));
-        $post->setPostText($this->request()->getValue('post_text'));
+
+        $postText = trim($this->request()->getValue('post_text'));
+        $postText = htmlspecialchars($postText, ENT_QUOTES, 'UTF-8');
+
+        if (strlen($postText) > 500 || strlen($postText) < 50) {
+            throw new Exception("Error: Text príspevku musí mať maximálne 500 znakov a minimálne 50");
+        }
+
+        $post->setPostText($postText);
+
         $post->setAuthor($_SESSION['user']->getUsername());
         $post->setCreatedAt(date('Y-m-d H:i:s'));
         $newPhoto = $this->processUploadedFile($post);

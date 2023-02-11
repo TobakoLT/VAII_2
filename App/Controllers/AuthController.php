@@ -51,7 +51,7 @@ class AuthController extends AControllerBase
 
             $email = filter_var($formData["email"], FILTER_VALIDATE_EMAIL);
             if (!$email) {
-                throw new Exception("Emailová adresa nie je platná");
+                throw new Exception("Emailová adresa je neplatná");
             }
 
             $password = $formData["password"];
