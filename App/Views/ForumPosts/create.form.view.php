@@ -33,7 +33,7 @@ $themeId = $data['post']->getId() ? $data['post']->getThemeId() : $data['id'];
         </div>
         <div class="form-group pt-3">
             <label for="attachment_image">Príloha:</label>
-            <input type="file" class="form-control-file" id="attachment_image" name="photo">
+            <input type="file" class="form-control" formenctype="multipart/form-data" id="attachment_image" name="photo">
         </div>
         <div class="form-group d-flex justify-content-center">
             <button type="submit" class="btn btn-dark my-3">Odoslať</button>
