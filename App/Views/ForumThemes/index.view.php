@@ -49,3 +49,25 @@ use App\Models\ForumTheme;
         <?php } ?>
         <a class="btn btn-secondary " href="?c=forumPosts&a=showAllPosts">Všetky príspevky</a>
     </div>
+    <!-- Modálne okno -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="conductModalLabel" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content border border-3">
+                <div class="modal-header ">
+                    <h5 class="modal-title fw-bold" id="conductModalLabel">Upozornenie na správanie</h5>
+                </div>
+                <div class="modal-body">
+                    Toto upozornenie slúži na zvýšenie zodpovednosti a slušnosti užívateľov fóra.
+                </div>
+                <div class="modal-footer ">
+                    <a href="?c=home" ><button type="button" class="btn " id="leave">Nechápem</button></a>
+                    <button type="button" class="btn " id="agree">Rozumiem</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        themeDeleteConfirm();
+        displayConductModal();
+    </script>
