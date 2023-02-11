@@ -15,16 +15,16 @@
             integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
             crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js"></script>
-    <link rel="stylesheet" href="public/css/styl.css">
-    <script src="public/js/script.js"></script>
-    <link rel="icon" type="image/x-icon" href="public/images/motologo1.png">
+    <link rel="stylesheet" href="/public/css/styl.css">
+    <script src="/public/js/script.js"></script>
+    <link rel="icon" type="image/x-icon" href="/public/images/motologo1.png">
 </head>
 <body>
 <nav class="navbar navbar-expand-md bg-color border border-danger border-opacity-25 border-1">
     <div class="container-fluid ">
         <div class="">
             <a class="navbar-brand" href="?c=home">
-                <img src="public/images/motologo1.png" alt="" title="<?= \App\Config\Configuration::APP_NAME ?>">
+                <img src="/public/images/motologo1.png" alt="" title="<?= \App\Config\Configuration::APP_NAME ?>">
             </a>
         </div>
 
@@ -55,12 +55,12 @@
 
                     <li class="nav-item me-1">
                         <a class="nav-link menu-button rounded" href="?c=auth&a=account">
-                            <img src="public/images/account.webp" class="nav-logo" alt="" title="">
+                            <img src="/public/images/account.webp" class="nav-logo" alt="" title="">
                         </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link menu-button rounded" href="?c=auth&a=logout">
-                            <img src="public/images/logout.png" class="nav-logo" alt="" title="">
+                            <img src="/public/images/logout.png" class="nav-logo" alt="" title="">
                         </a>
                     </li>
                 </ul>
@@ -68,7 +68,7 @@
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
                         <a class="nav-link menu-button rounded" href="<?= \App\Config\Configuration::LOGIN_URL ?>">
-                            <img src="public/images/login.png" class="nav-logo" alt=""
+                            <img src="/public/images/login.png" class="nav-logo" alt=""
                                  title="<?= \App\Config\Configuration::APP_NAME ?>">
                         </a>
                     </li>
