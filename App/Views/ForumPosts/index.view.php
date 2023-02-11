@@ -31,7 +31,7 @@ use App\Models\ForumTheme;
                                 <button class="spoiler-button simpleHoverRed" data-target="<?= $imageId ?>"
                                         onclick="toggleImage(<?= $imageId ?>)">Zobraziť prílohu
                                 </button>
-                                <button class="hide-spoiler-button" data-target="<?= $imageId ?>"
+                                <button class="hide-spoiler-button simpleHoverYellow" data-target="<?= $imageId ?>"
                                         onclick="toggleImage(<?= $imageId ?>)" style="display: none">Skryť
                                 </button>
                             </div>
@@ -45,8 +45,9 @@ use App\Models\ForumTheme;
                             <?php echo $post->getCreatedAt() ?>
                         </small>
                         <small class="float-end fw-semibold">
-                            <?php if ($_SESSION["user"]->getUsername() == $post->getAuthor()) { ?>
-                                <a href="?c=forumPosts&a=delete&id=<?php echo $post->getId() ?>" class="me-2">
+                            <?php if ($auth->isLogged() && $_SESSION["user"]->getUsername() == $post->getAuthor()) { ?>
+                                <a href="?c=forumPosts&a=delete&id=<?php echo $post->getId() ?>&theme_id=<?php echo $post->getThemeId() ?>"
+                                   class="me-2">
                                     Zmazať
                                 </a>
 
