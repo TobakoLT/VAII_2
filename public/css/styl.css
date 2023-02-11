@@ -2,9 +2,79 @@
     border-bottom: 1px solid grey;
 }
 
+#myModal .modal-dialog {
+    max-width: 600px;
+    margin: 30px auto;
+
+}
+
+#myModal .modal-header {
+    background: linear-gradient(
+            90deg,
+            rgb(255, 185, 0),
+            rgba(252, 14, 71, 0.5) 100%) no-repeat fixed;
+    color: #fff;
+    border-bottom: none;
+    padding: 20px;
+    border-bottom: 1px solid rgb(255, 255, 255);
+
+}
+
+#myModal .modal-body {
+    background: linear-gradient(
+            45deg,
+            rgb(255, 185, 0),
+            rgba(252, 14, 71, 0.5) 100%) no-repeat fixed;
+    color: #fff;
+    padding: 20px;
+    border-bottom: 1px solid rgb(255, 255, 255);
+}
+
+#myModal .modal-footer {
+    background: linear-gradient(
+            90deg,
+            rgb(255, 185, 0),
+            rgba(252, 14, 71, 0.5) 100%) no-repeat fixed;
+    color: #fff;
+    border-top: none;
+    padding: 10px 20px;
+    text-align: right;
+}
+
+.modal-footer button {
+    background-color: white;
+}
+
+.modal-footer button:hover {
+    transition: background-color 0.2s ease-in-out;
+    background-color: #e6e6e6;
+    color: #1f1f1f;
+}
+
 .nav-logo {
     width: 34px;
     height: 34px;
+}
+
+.simpleHoverRed:hover {
+    background-color: #ef0606;
+    color: #fff;
+    cursor: pointer;
+    transform: scale(1.05);
+    transition: all 0.2s ease-in-out;
+}
+
+.simpleHoverYellow:hover {
+    background-color: #ffe800;
+    color: #000000;
+    cursor: pointer;
+    transform: scale(1.05);
+    transition: all 0.2s ease-in-out;
+}
+
+.spoiler-image {
+    max-width: 300px;
+    max-height: 200px;
 }
 
 .password-strength-indicator {
