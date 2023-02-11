@@ -39,7 +39,13 @@ class ForumThemesController extends AControllerBase
     public function index(): Response
     {
         $forumThemes = ForumTheme::getAll();
-        return $this->html($forumThemes);
+        $postCount = [];
+
+        foreach ($forumThemes as $theme) {
+            $posts = ForumPost::getAll("theme_id = ?", [$theme->getId()]);
+            $postCount[$theme->getId()] = count($posts);
+        }
+        return $this->html(["forumThemes" => $forumThemes, "postCount" =>$postCount]);
     }
 
     /**
@@ -60,6 +66,22 @@ class ForumThemesController extends AControllerBase
         } else {
             echo 'Téma sa nepodarilo vymazať';
         }
+    }
+
+    /**
+     * @throws Exception
+     */
+    public function countPostsInThemes()
+    {
+        $themes = ForumTheme::getAll();
+        $postCount = [];
+
+        foreach ($themes as $theme) {
+            $posts = ForumPost::getAll("theme_id = ?", [$theme->getId()]);
+            $postCount[$theme->getId()] = count($posts);
+        }
+
+        return $this->html($postCount);
     }
 
     /**
