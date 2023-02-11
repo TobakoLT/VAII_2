@@ -43,15 +43,12 @@ class PostsController extends AControllerBase
     {
         date_default_timezone_set('Europe/Prague');
         $id = $this->request()->getValue('id');
-        $post = ($id ? Post::getOne($id) : new Post());
-        $oldPhoto = $post->getObrazok();
 
         $post = ( $id ? Post::getOne($id) : new Post());
         $post->setAutor($_SESSION["user"]->getMeno());
         $post->setNadpis($this->request()->getValue('nadpis'));
         $post->setDatum(date("Y-m-d"));
         $post->setClanok($this->request()->getValue('clanok'));
-        //$post->setObrazok($this->processUploadedFile($post));
         $newPhoto = $this->processUploadedFile($post);
         if ($newPhoto != null) {
             $post->setObrazok($newPhoto);
