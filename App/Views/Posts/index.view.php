@@ -28,7 +28,7 @@ foreach ($data as $post) {
 
         <?php if($auth->isLogged()) {?>
         <a href="?c=posts&a=delete&id=<?php echo $post->getId() ?>" class="btn btn-danger">
-            Zmazat
+            Zmazať
         </a>
 
         <a href="?c=posts&a=edit&id=<?php echo $post->getId() ?>" class="btn btn-warning">
