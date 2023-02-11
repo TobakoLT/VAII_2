@@ -25,7 +25,19 @@ use App\Models\ForumTheme;
                             tému</a>
                     </div>
                     <div class="card-footer">
-
+                        <small>
+                            <?php echo $forumTheme->getCreatedAt() ?>
+                        </small>
+                        <small class="float-end fw-bold">
+                            <?php if ($auth->isLogged() && $_SESSION["user"]->getAdmin()) { ?>
+                                <button class="delete-theme simpleHoverRed" data-id="<?= $forumTheme->getId() ?>">Zmazať
+                                </button>
+                                <button class="me-2 simpleHoverYellow"
+                                        onclick="location.href='?c=forumThemes&a=edit&id=<?= $forumTheme->getId() ?>'">
+                                    Upraviť
+                                </button>
+                            <?php } ?>
+                        </small>
                     </div>
                 </div>
             </div>
