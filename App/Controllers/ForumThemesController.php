@@ -50,10 +50,9 @@ class ForumThemesController extends AControllerBase
     }
 
     /**
-     * @return \App\Core\Responses\JsonResponse
      * @throws Exception
      */
-    public function delete(): JsonResponse
+    public function delete(): void
     {
         $id = $this->request()->getValue('id');
         $themeToDelete = ForumTheme::getOne($id);
