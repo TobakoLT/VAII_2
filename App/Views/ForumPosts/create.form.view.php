@@ -29,15 +29,20 @@ $themeId = $data['post']->getId() ? $data['post']->getThemeId() : $data['id'];
         <div class="form-group pt-2">
             <label for="author">Autor:</label>
             <input type="text" class="form-control" id="author" name="author" style="font-weight: bold"
-                   value="<?php echo $_SESSION["user"]->getMeno(); ?>" disabled>
+                   value="<?php echo $_SESSION["user"]->getUsername(); ?>" disabled>
         </div>
         <div class="form-group pt-3">
-            <label for="attachment_image">Príloha:</label>
-            <input type="file" class="form-control" formenctype="multipart/form-data" id="attachment_image" name="photo">
+            <label for="photo">Príloha:</label>
+            <div class="text-danger" id="img-input-error"></div>
+            <input type="file" class="form-control" formenctype="multipart/form-data" id="photo" name="photo">
+
         </div>
         <div class="form-group d-flex justify-content-center">
-            <button type="submit" class="btn btn-dark my-3">Odoslať</button>
+            <button id="myButton" type="submit" class="btn btn-dark my-3">Odoslať</button>
         </div>
     </form>
 </div>
+<script>
+    imageInput2();
+</script>
 
