@@ -48,6 +48,7 @@ use App\Models\ForumTheme;
             <a class="btn btn-secondary " href="?c=forumThemes&a=create">Nová téma</a>
         <?php } ?>
         <a class="btn btn-secondary " href="?c=forumPosts&a=showAllPosts">Všetky príspevky</a>
+        <a class="btn btn-secondary " href="?c=forumPosts&a=userPosts">Moje príspevky</a>
     </div>
     <!-- Modálne okno -->
     <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="conductModalLabel" aria-hidden="true" data-backdrop="static" data-keyboard="false">
@@ -60,13 +61,13 @@ use App\Models\ForumTheme;
                     Toto upozornenie slúži na zvýšenie zodpovednosti a slušnosti užívateľov fóra.
                 </div>
                 <div class="modal-footer ">
-                    <a href="?c=home" ><button type="button" class="btn " id="leave">Nechápem</button></a>
+                    <a href="?c=home" class="btn btn-light" id="leave">Nechápem</a>
                     <button type="button" class="btn " id="agree">Rozumiem</button>
                 </div>
             </div>
         </div>
     </div>
-
+</div>
     <script>
         themeDeleteConfirm();
         displayConductModal();
