@@ -125,7 +125,7 @@ class AuthController extends AControllerBase
     /**
      * @return \App\Core\Responses\JsonResponse
      */
-    public function loginUser(): Response
+    public function loginUserCheck(): Response
     {
         $login = $this->request()->getValue('username');
         $password = $this->request()->getValue('password');
@@ -137,6 +137,38 @@ class AuthController extends AControllerBase
         return $this->json(['success' => true]);
     }
 
+    /**
+     * @return \App\Core\Responses\JsonResponse
+     * @throws Exception
+     */
+    public function registerUsernameCheck(): Response
+    {
+        if (isset($_POST['username'])) {
+            $username = htmlspecialchars(trim($_POST['username']), ENT_QUOTES);
+            $users = User::getAll("username = ?", [$username]);
+            return new JsonResponse(['taken' => count($users) > 0]);
+        }
+
+        return new JsonResponse(['error' => 'Nezadané žiadne meno!']);
+    }
+
+    /**
+     * @return \App\Core\Responses\JsonResponse
+     * @throws Exception
+     */
+    public function registerEmailCheck(): Response
+    {
+        if (isset($_POST['email'])) {
+            $email = htmlspecialchars(trim($_POST['email']), ENT_QUOTES);
+            if ($email != '' && !filter_var($email, FILTER_VALIDATE_EMAIL)) {
+                return new JsonResponse(['notValid' => true]);
+            }
+            $users = User::getAll("email = ?", [$email]);
+            return new JsonResponse(['taken' => count($users) > 0]);
+        }
+
+        return new JsonResponse(['error' => 'Nezadaný žiaden email']);
+    }
 
     /**
      * Logout a user
@@ -175,7 +207,7 @@ class AuthController extends AControllerBase
     {
         $photo = $this->request()->getFiles()['photo'];
         if (!is_null($photo) && $photo['error'] == UPLOAD_ERR_OK) {
-            $targetFile = "public" . DIRECTORY_SEPARATOR . "photosAccount" . DIRECTORY_SEPARATOR . time() . "_" . $photo['name'];
+            $targetFile = "public/photosAccount/" . time() . "_" . $photo['name'];
             if (move_uploaded_file($photo["tmp_name"], $targetFile)) {
                 if ($user->getId() && $user->getAccountImg()) {
                     unlink($user->getAccountImg());
