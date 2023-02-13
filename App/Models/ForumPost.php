@@ -9,7 +9,7 @@ class ForumPost extends Model
     protected ?int $id = 0;
     protected ?int $theme_id = 0;
     protected ?string $post_text = "";
-    protected ?string $author = "";
+    protected ?int $author = 0;
     protected ?string $created_at;
     protected ?string $attachment_image = "";
 
@@ -62,17 +62,17 @@ class ForumPost extends Model
     }
 
     /**
-     * @return string|null
+     * @return int|null
      */
-    public function getAuthor(): ?string
+    public function getAuthor(): ?int
     {
         return $this->author;
     }
 
     /**
-     * @param string|null $author
+     * @param int|null $author
      */
-    public function setAuthor(?string $author): void
+    public function setAuthor(?int $author): void
     {
         $this->author = $author;
     }
