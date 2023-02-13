@@ -9,6 +9,23 @@ function modal() {
     document.querySelector('.popup-image').onclick = () => {
         document.querySelector('.popup-image').style.display = 'none';
     }
+}
+
+function displayConductModal() {
+    if (sessionStorage.getItem("conduct") !== "true") {
+        $(document).ready(function () {
+            $('#myModal').modal({
+                backdrop: 'static',
+                keyboard: false
+            });
+            $('#myModal').modal('show');
+        });
+    }
+
+    $('#agree').click(function () {
+        $('#myModal').modal('hide');
+        sessionStorage.setItem("conduct", "true");
+    });
 
 }
 */
