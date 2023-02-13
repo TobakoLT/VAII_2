@@ -3,6 +3,7 @@ namespace App\Controllers;
 
 use App\Config\Configuration;
 use App\Core\AControllerBase;
+use App\Core\Responses\RedirectResponse;
 use App\Core\Responses\Response;
 use App\Core\Responses\JsonResponse;
 use App\Models\ForumPost;
@@ -52,7 +53,7 @@ class ForumThemesController extends AControllerBase
      * @return \App\Core\Responses\JsonResponse
      * @throws Exception
      */
-    public function delete()
+    public function delete(): JsonResponse
     {
         $id = $this->request()->getValue('id');
         $themeToDelete = ForumTheme::getOne($id);
@@ -72,7 +73,7 @@ class ForumThemesController extends AControllerBase
      * @return \App\Core\Responses\RedirectResponse
      * @throws Exception
      */
-    public function store()
+    public function store(): RedirectResponse
     {
         date_default_timezone_set('Europe/Prague');
         $id = $this->request()->getValue('id');
