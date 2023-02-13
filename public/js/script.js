@@ -33,16 +33,28 @@ function passwordStrengthOld() {
     const passwordInput = document.getElementById('password');
     const passwordStrengthIndicator = document.getElementById('password-strength-indicator');
 
-    passwordInput.addEventListener('input', checkPasswordStrength);
+function imageInput() {
+    const input = document.getElementById("photo");
+    input.addEventListener("change", function () {
+        const file = input.files[0];
+        const allowedExtensions = [".jpg", ".jpeg", ".png", ".gif", "webp"];
+        const extension = file.name.slice(file.name.lastIndexOf(".") + 1);
+        if (!allowedExtensions.includes(extension)) {
+            alert("Nepodporovaný typ súboru! Prosím vyberte obrázok (JPG, JPEG, PNG, GIF alebo WEBP! )");
+        } else {
 
     function checkPasswordStrength() {
         const password = passwordInput.value;
         const strengthRegex = new RegExp("^(?=.{8,})(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*\\W).*$", "g");
         const mediumRegex = new RegExp("^(?=.{8,})(((?=.*[A-Z])(?=.*[a-z]))|((?=.*[A-Z])(?=.*[0-9]))|((?=.*[a-z])(?=.*[0-9]))).*$", "g");
 
-        if (strengthRegex.test(password)) {
-            // Silné
-            passwordStrengthIndicator.innerHTML = '<div class="strength strong">Silné</div>';
+function imageInput2() {
+    const input = document.getElementById("photo");
+    const errorDiv = document.getElementById("img-input-error");
+    input.addEventListener("change", function () {
+        if (!input.files[0]) {
+            errorDiv.innerHTML = "";
+            document.getElementById("myButton").disabled = false;
         } else {
             if (mediumRegex.test(password)) {
                 passwordStrengthIndicator.innerHTML = '<div class="strength medium">Stredne silné</div>'
