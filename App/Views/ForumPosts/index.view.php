@@ -2,6 +2,7 @@
 
 use App\Models\ForumPost;
 use App\Models\ForumTheme;
+use App\Models\User;
 
 /** @var \App\Core\IAuthenticator $auth */
 /** @var ForumPost[] $data */
@@ -11,6 +12,8 @@ use App\Models\ForumTheme;
 <div class="container bg-white rounded border border-dark my-5">
     <?php if ($data['themeId'] != NULL) { ?>
         <h2 class="text-center fw-bold pt-2"><?php echo ForumTheme::getOne($data['themeId'])->getNazov() ?></h2>
+    <?php } else if (array_key_exists('myPost', $data)) { ?>
+        <h2 class="text-center fw-bold pt-2">Moje príspevky</h2>
     <?php } else { ?>
         <h2 class="text-center fw-bold pt-2">Všetky príspevky</h2>
     <?php } ?>
@@ -19,10 +22,9 @@ use App\Models\ForumTheme;
             <?php
             $imageId = 1;
             foreach ($data['posts'] as $post) { ?>
-                <!--<div style="margin-top: 15px;"></div>-->
                 <div class="card mb-3 border border-2 border-dark">
                     <div class="card-header">
-                        <small class="fw-bold"><?php echo $post->getAuthor() ?></small>
+                        <small class="fw-bold"><?php echo User::getOne($post->getAuthor())->getUsername() ?></small>
                     </div>
                     <div class="card-body">
                         <p><?= $post->getPostText() ?></p>
@@ -45,7 +47,7 @@ use App\Models\ForumTheme;
                             <?php echo $post->getCreatedAt() ?>
                         </small>
                         <small class="float-end fw-semibold">
-                            <?php if ($auth->isLogged() && $_SESSION["user"]->getUsername() == $post->getAuthor()) { ?>
+                            <?php if ($auth->isLogged() && $_SESSION["user"]->getUsername() == User::getOne($post->getAuthor())->getUsername() || $_SESSION["user"]->getAdmin()) { ?>
                                 <a href="?c=forumPosts&a=delete&id=<?php echo $post->getId() ?>&theme_id=<?php echo $post->getThemeId() ?>"
                                    class="me-2">
                                     Zmazať
