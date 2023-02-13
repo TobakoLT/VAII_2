@@ -93,7 +93,7 @@ class PostsController extends AControllerBase
     {
         $photo = $this->request()->getFiles()['photo'];
         if (!is_null($photo) && $photo['error'] == UPLOAD_ERR_OK) {
-            $targetFile = "public" . DIRECTORY_SEPARATOR . "photosPosts" . DIRECTORY_SEPARATOR . time() . "_" . $photo['name'];
+            $targetFile = "public/photosPosts/" . time() . "_" . $photo['name'];
             if (move_uploaded_file($photo["tmp_name"], $targetFile)) {
                 if ($post->getId() && $post->getObrazok()) {
                     unlink($post->getObrazok());

@@ -80,7 +80,7 @@ class ImagesController extends AControllerBase
     {
         $photo = $this->request()->getFiles()['photo'];
         if (!is_null($photo) && $photo['error'] == UPLOAD_ERR_OK) {
-            $targetFile = "public" . DIRECTORY_SEPARATOR . "photosImages" . DIRECTORY_SEPARATOR . time() . "_" . $photo['name'];
+            $targetFile = "public/photosImages/" . time() . "_" . $photo['name'];
             if (move_uploaded_file($photo["tmp_name"], $targetFile)) {
                 if ($image->getId() && $image->getImg()) {
                     unlink($image->getImg());
