@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Controllers;
 
 use App\Config\Configuration;
@@ -27,6 +28,15 @@ class ForumPostsController extends AControllerBase
         $themeId = NULL;
         $forumPosts = ForumPost::getAll();
         return $this->html(['posts' => $forumPosts, 'themeId' => $themeId], viewName: 'index');
+    }
+
+    public function userPosts(): Response
+    {
+        $myPost = 1;
+        $themeId = NULL;
+        $user = $_SESSION["user"]->getId();
+        $forumPosts = ForumPost::getAll("author = ?", [$user]);
+        return $this->html(['posts' => $forumPosts, 'themeId' => $themeId, 'myPost' => $myPost], viewName: 'index');
     }
 
     public function authorize($action): bool
@@ -61,7 +71,7 @@ class ForumPostsController extends AControllerBase
 
         $post->setPostText($postText);
 
-        $post->setAuthor($_SESSION['user']->getUsername());
+        $post->setAuthor($_SESSION['user']->getId());
         $post->setCreatedAt(date('Y-m-d H:i:s'));
         $newPhoto = $this->processUploadedFile($post);
         if ($newPhoto != null) {
@@ -75,17 +85,22 @@ class ForumPostsController extends AControllerBase
     public function create()
     {
         $id = $this->request()->getValue('id');
-        return $this->html(['post' => new ForumPost(),'id' => $id], viewName: 'create.form');
+        return $this->html(['post' => new ForumPost(), 'id' => $id], viewName: 'create.form');
     }
 
+    /**
+     * @throws Exception
+     */
     public function delete()
     {
         $id = $this->request()->getValue('id');
         $theme_id = $this->request()->getValue('theme_id');
         $postToDelete = ForumPost::getOne($id);
-        if ($postToDelete) {
-            $postToDelete->delete();
+        if (!$postToDelete || !$this->app->getAuth()->getLoggedUserContext()->getAdmin() && ($this->app->getAuth()->getLoggedUserId() !== $postToDelete->getAuthor())) {
+            return $this->redirect("?c=forumThemes");
         }
+        $postToDelete->delete();
+
         return $this->redirect('?c=forumPosts&a=index&themeId=' . $theme_id);
     }
 
@@ -101,7 +116,10 @@ class ForumPostsController extends AControllerBase
     {
         $photo = $this->request()->getFiles()['photo'];
         if (!is_null($photo) && $photo['error'] == UPLOAD_ERR_OK) {
-            $targetFile = "public" . DIRECTORY_SEPARATOR . "photosPostsForum" . DIRECTORY_SEPARATOR . time() . "_" . $photo['name'];
+            $targetFile = "public/photosPostsForum/" . time() . "_" . $photo['name'];
+            if (!getimagesize($photo["tmp_name"])) {
+                throw new Exception("Chyba: nahrany subor nie je obrazok");
+            }
             if (move_uploaded_file($photo["tmp_name"], $targetFile)) {
                 if ($post->getId() && $post->getAttachmentImage()) {
                     unlink($post->getAttachmentImage());
