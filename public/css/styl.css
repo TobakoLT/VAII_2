@@ -77,6 +77,11 @@
     max-height: 200px;
 }
 
+.form-error {
+    font-size: small;
+    color: #ff0000;
+}
+
 .password-strength-indicator {
     width: 100%;
     height: 10px;
